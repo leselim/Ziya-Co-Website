@@ -4,6 +4,7 @@ export const LAUNCH_DATE = new Date(LAUNCH_ISO);
 export const LAUNCH_LABEL = "9 December 2026";
 
 export const CONTACT_EMAIL = "info@ziyaco.co.za";
+export const CONTACT_CELL = "063 123 3361";
 
 /**
  * Where subscriptions go.

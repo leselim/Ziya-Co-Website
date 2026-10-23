@@ -1,3 +1,4 @@
+import Reveal from "./Reveal";
 import { LAUNCH_DATE } from "../config";
 import { useCountdown } from "../hooks/useCountdown";
 
@@ -18,17 +19,16 @@ export default function Countdown() {
       <div className="container countdown__inner">
         <div>
           <p className="label">The countdown</p>
-          <h2 className="display">Something meaningful is on the horizon</h2>
+          <h2 className="display">Opening 9 December 2026</h2>
           <p className="countdown__support">
-            Ziya &amp; Co. arrives on 9 December 2026. Be there from the
-            beginning.
+            Be there from the beginning.
           </p>
         </div>
 
-        <div>
+        <Reveal>
           {done ? (
             <p className="countdown__launched">
-              The collection is open. Thank you for waiting with us.
+              ZIYA &amp; CO is open. Thank you for waiting with us.
             </p>
           ) : (
             <ol className="counter" aria-hidden="true">
@@ -43,10 +43,10 @@ export default function Countdown() {
           {/* announced once a minute rather than once a second */}
           <p className="sr-only" aria-live="polite">
             {done
-              ? "The collection is open."
-              : `${days} days, ${hours} hours and ${minutes} minutes until Ziya and Co. opens on 9 December 2026.`}
+              ? "Ziya and Co is open."
+              : `${days} days, ${hours} hours and ${minutes} minutes until Ziya and Co opens on 9 December 2026.`}
           </p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

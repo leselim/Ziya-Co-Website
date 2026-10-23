@@ -1,35 +1,33 @@
 import Typed from "./Typed";
 
-const HEADLINE = [{ t: "Timeless pieces for every version of you" }];
+const HEADLINE = [{ t: "Jewellery for every day, and every version of you" }];
 
 export default function Hero() {
   return (
     <section className="hero" id="top">
       <div className="container">
-        <p className="label hero__label">South Africa &middot; Launching 09.12.26</p>
-
         <Typed
           as="h1"
           className="display"
           segments={HEADLINE}
-          speed={34}
-          delay={420}
+          speed={46}
+          delay={400}
         />
 
         <div className="hero__rule" aria-hidden="true" />
 
         <div className="hero__foot">
           <p className="lede">
-            Jewellery designed to become part of your story. Thoughtful,
-            effortless and made for the way you live.
+            ZIYA &amp; CO was created from a place of love. A deep, undeniable
+            love for jewellery and the way it makes you feel.
           </p>
 
           <div className="hero__actions">
             <a className="btn" href="#notify">
               Be first to know
             </a>
-            <a className="textlink" href="#philosophy">
-              Discover our philosophy
+            <a className="textlink" href="#story">
+              Read the story
               <span className="arrow" aria-hidden="true">
                 &rarr;
               </span>

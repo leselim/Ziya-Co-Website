@@ -83,7 +83,7 @@ export default function Typed({
       aria-label={whole}
       /* the finished line is the default; this hands over to the typed one
          only once we know we are animating */
-      data-typing={animating ? "true" : undefined}
+      data-typing={animating && started ? "true" : undefined}
       data-done={done ? "true" : "false"}
     >
       {/* holds the height so nothing moves while the line arrives */}

@@ -13,6 +13,13 @@
 (function () {
   "use strict";
 
+  /* Mark the document first, before anything that could throw. The CSS only
+     hides a section for its entrance once this is set, so if this file never
+     loads or dies later, the page still reads in full. */
+  try {
+    document.documentElement.setAttribute("data-js", "true");
+  } catch (ignored) {}
+
   var LAUNCH = new Date("2026-12-09T00:00:00+02:00"); // SAST
   /* Paste the Apps Script Web App URL between the quotes, e.g.
      "https://script.google.com/macros/s/AKfycb..../exec" */
@@ -87,7 +94,11 @@
     var out = el.querySelector(".typed__out");
     if (!segs.length || !out) return;
 
-    var speed = parseInt(el.getAttribute("data-speed"), 10) || 36;
+    /* only now does the finished line hand over to the one being typed, so a
+       line that is never reached simply stays readable */
+    el.setAttribute("data-typing", "true");
+
+    var speed = parseInt(el.getAttribute("data-speed"), 10) || 62;
     var delay = parseInt(el.getAttribute("data-delay"), 10) || 0;
     var text = segs.map(function (s) { return s.t; }).join("");
     var total = text.length;
@@ -120,8 +131,8 @@
         return;
       }
       var just = text.charAt(n - 1);
-      var rest = /[,.]/.test(just) ? 160 : /\s/.test(just) ? 40 : 0;
-      window.setTimeout(step, speed + rest + Math.random() * 18);
+      var rest = /[,.?]/.test(just) ? 420 : /\s/.test(just) ? 110 : 0;
+      window.setTimeout(step, speed + rest + Math.random() * 30);
     }
     window.setTimeout(step, delay);
   }
@@ -138,8 +149,6 @@
     if (reduce) return;
 
     lines.forEach(function (el) {
-      /* only now does the finished line hand over to the typed one */
-      el.setAttribute("data-typing", "true");
       if (el.getAttribute("data-on-view") !== "true") {
         typeLine(el);
         return;

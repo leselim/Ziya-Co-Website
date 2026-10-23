@@ -148,18 +148,39 @@ Ziya-and-Co-Coming-Soon-preview.html    self-contained preview, no build needed
 
 ## The palette
 
+Built from the two brand colours, Taffet and Bram.
+
 ```
---ivory      #f7f3ed   the dominant ground
---champagne  #e8ded0   one supporting surface (the countdown band)
---espresso   #29231f   type, and the dark sections
---gold       #b49a72   accents and fine detail
---taupe      #81766a   borders; large type only
+--taffet     #f0d4c3   the brand blush, as a supporting band
+--bram       #6c7b7b   the brand sage: large display type and rules
+--shell      #faf1ea   Taffet lightened, the page ground
+--sage-deep  #4e5a5a   Bram deepened, the dark sections
+--ink        #3a4444   Bram at its deepest, for body copy
 ```
 
-Three measurements shaped how these are used:
+The two supplied colours cannot carry the site on their own, and the
+measurements say why:
 
-| | on warm ivory | verdict |
-|---|---|---|
+| | |
+|---|---|
+| Bram on Taffet | **3.13:1** — large display type only |
+| Bram as a background, with Taffet on it | **3.13:1** — same |
+| Bram as a background, with pure white on it | **4.41:1** — still short of AA |
+
+So Bram appears at full strength wherever it is large or decorative: the hero
+and section headings, the rules, the hairlines. It is lightened into the page
+ground and deepened for the dark sections and for body copy. Both brand
+colours are present untouched, as the blush band and as the headings.
+
+Two consequences worth knowing if the palette is edited:
+
+1. **Nothing under 24px is ever set in Bram.** On the ground it measures
+   3.96:1, which carries large text and nothing else. The profile headings
+   clamp to 25px on a phone, so they are set in the ink rather than Bram.
+2. **Small text on the blush band takes the ink at full strength.** Held back
+   even to 78% it drops to 4.26:1 there.
+
+---|---|---|
 | warm taupe `#81766a` | 4.01:1 | below AA for small text |
 | muted gold `#b49a72` | 2.43:1 | below AA for any text |
 | soft champagne `#e8ded0` | 1.20:1 | too close to stand alone as a plane |
@@ -230,12 +251,36 @@ column grid, and a picture can take the right column.
 
 ## Page structure
 
-Hero, our story, the philosophy, who it is for, the countdown, early access,
+Hero, our story, the philosophy, good to know, the countdown, early access,
 footer.
 
-The page alternates ground: ivory, ivory, **espresso**, ivory, **champagne**,
-ivory, **espresso**. The two dark bands carry the philosophy statement and the
-footer; the champagne band carries the countdown.
+The page alternates ground: shell, shell, **sage**, shell, **blush**, shell,
+**sage**.
 
-Type scale at 1440: headline 108px, section headings 58px, the philosophy
-statement 82px, countdown numerals 100px, body 16px at 1.75.
+All copy comes from the brand document, recast out of first person into a
+biography of the business that speaks to the reader. The "good to know"
+section is drawn from the FAQ and care notes, with the hedging left exactly
+as written ("made to be resistant to tarnishing", not "will not tarnish").
+
+The document also contains full shipping, returns, privacy and terms copy.
+None of it is on this page: those are store pages for when the shop opens,
+and a coming-soon page is the wrong place for a returns policy. The privacy
+note beside the signup form is the one exception, and it summarises the real
+policy rather than inventing terms.
+
+## Motion
+
+Two lines type themselves: the hero headline on load (about 4.6 seconds) and
+the philosophy statement when it is scrolled to (about 3 seconds). The pace
+varies per character and rests longer at punctuation.
+
+Everything else is quiet: sections fade up as they arrive, the countdown
+units settle one after another, the wordmark opens its tracking on load, the
+rule under the headline draws itself once the line lands, and hover
+transitions run at 0.45s.
+
+**None of it can hide content.** The entrance rules only apply once the
+script has set `data-js` on the document, and a line only hands over to its
+typed copy at the moment it actually starts typing. With JavaScript off, a
+broken script, no `IntersectionObserver`, or reduced motion, the page reads
+in full. All four cases are tested.

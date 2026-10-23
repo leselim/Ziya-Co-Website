@@ -1,5 +1,5 @@
 import Wordmark from "./Wordmark";
-import { CONTACT_EMAIL, LAUNCH_LABEL } from "../config";
+import { CONTACT_EMAIL, CONTACT_CELL, LAUNCH_LABEL } from "../config";
 
 export default function SiteFooter() {
   return (
@@ -7,9 +7,12 @@ export default function SiteFooter() {
       <div className="container">
         <div className="site-footer__top">
           <Wordmark />
-          <p className="site-footer__tagline">Jewellery for the way you live</p>
+          <p className="site-footer__tagline">
+            Jewellery for every day, and every version of you
+          </p>
           <p className="site-footer__contact">
             <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+            <a href={`tel:${CONTACT_CELL.replace(/\s/g, "")}`}>{CONTACT_CELL}</a>
           </p>
         </div>
         <div className="site-footer__base">

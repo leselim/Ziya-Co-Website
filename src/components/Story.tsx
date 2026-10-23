@@ -8,36 +8,41 @@ export default function Story() {
           <div>
             <p className="label">Our story</p>
             <h2 className="display">
-              Jewellery that carries meaning. Beauty that begins within
+              Why should that feeling be reserved for special occasions?
             </h2>
           </div>
           <p className="prose">
-            Inspired by the meaning associated with light, radiance and
-            brilliance, <em>Ziya</em> &amp; Co. was created around a simple
-            belief: jewellery is more than something we wear. It reflects who
-            we are, what we cherish and the moments that shape our lives.
+            At ZIYA &amp; CO, jewellery has always been more than an accessory.
+            There is something about the perfect pair of earrings, a delicate
+            bracelet, a necklace that somehow makes you feel a little more
+            beautiful, a little more confident, and completely yourself.
           </p>
         </Reveal>
 
         <div className="story__columns">
           <Reveal>
             <p>
-              We believe the most meaningful pieces become part of our stories.
-              They celebrate becoming, hold memories close and remind us of the
-              beauty found in life&rsquo;s everyday moments.
+              ZIYA &amp; CO believes jewellery is meant to be lived in. Worn on
+              ordinary days and on big ones, on days you are dressed up and
+              days you are simply running errands. Because you deserve to feel
+              beautiful every day, not only when there is somewhere special to
+              go.
             </p>
           </Reveal>
-          <Reveal delay={80}>
+          <Reveal delay={110}>
             <p>
-              So we begin quietly. With considered design, restraint, and an
-              eye for the detail that only shows itself once a piece has been
-              worn for a while.
+              Every piece is chosen with the intention of adding a little
+              something to your day. A little sparkle, a little confidence, a
+              little joy.
             </p>
           </Reveal>
         </div>
 
         <Reveal>
-          <p className="story__close">Light, worn close</p>
+          <p className="story__close">
+            Because sometimes, the smallest details make you feel the most
+            special
+          </p>
         </Reveal>
       </div>
     </section>

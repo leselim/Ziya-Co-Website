@@ -103,8 +103,9 @@ export default function Notify() {
           <p className="label">Early access</p>
           <h2 className="display">Be first to wear it</h2>
           <p>
-            Join us at the beginning. Leave your email and receive one note
-            when the Ziya &amp; Co. collection launches on {LAUNCH_LABEL}.
+            Leave your email and receive one note when ZIYA &amp; CO opens on{" "}
+            {LAUNCH_LABEL}. Nothing before it, and nothing after it you did not
+            ask for.
           </p>
         </div>
 
@@ -160,9 +161,9 @@ export default function Notify() {
           </p>
 
           <p className="signup__privacy" id="signup-privacy">
-            We use your address for the launch note and nothing else. We do not
-            sell it or pass it on. Write to {CONTACT_EMAIL} at any time to be
-            removed.
+            Your address is used for the launch note only. You can unsubscribe
+            from any message, or write to {CONTACT_EMAIL} to be removed. See the
+            ZIYA &amp; CO privacy policy for how personal information is handled.
           </p>
         </form>
       </div>

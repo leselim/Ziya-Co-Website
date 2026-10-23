@@ -22,7 +22,7 @@ const prefersReduced = () =>
  */
 export function useTypewriter(
   segments: Segment[],
-  { start = true, speed = 36, delay = 0 } = {}
+  { start = true, speed = 62, delay = 0 } = {}
 ) {
   const total = segments.reduce((n, s) => n + s.t.length, 0);
   const instant = prefersReduced();
@@ -39,10 +39,10 @@ export function useTypewriter(
         if (next < total) {
           const justTyped = text[next - 1];
           /* a breath after punctuation, and a little human jitter */
-          const rest = /[,.]/.test(justTyped) ? 160 : /\s/.test(justTyped) ? 40 : 0;
+          const rest = /[,.?]/.test(justTyped) ? 420 : /\s/.test(justTyped) ? 110 : 0;
           timer.current = window.setTimeout(
             step,
-            speed + rest + Math.random() * 18
+            speed + rest + Math.random() * 30
           );
         }
         return next;
