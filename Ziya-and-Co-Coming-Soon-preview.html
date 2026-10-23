@@ -645,58 +645,129 @@ h3.display {
   max-width: 48ch;
 }
 
-/* ---------- audience ---------- */
-.profiles {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
+/* ---------- the accordion ----------
+   Built on native <details>, so it is keyboard operable and announced
+   correctly without a line of script, and still opens with JavaScript off.
+   The shared name attribute closes one answer as the next opens, where the
+   browser supports it, and is simply ignored where it does not. */
+.acc {
   margin-top: clamp(var(--s-6), 7vw, var(--s-8));
   border-top: 1px solid var(--rule-strong);
 }
-.profile {
-  padding: clamp(var(--s-5), 3.4vw, var(--s-7)) clamp(var(--s-4), 2.6vw, var(--s-5));
-  border-left: 1px solid var(--rule);
+.acc__item {
+  border-bottom: 1px solid var(--rule);
+}
+.acc__q {
   display: flex;
-  flex-direction: column;
-  gap: var(--s-4);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  padding-block: clamp(var(--s-4), 2.4vw, var(--s-5));
+  font-family: var(--display);
+  font-size: clamp(20px, 1.9vw, 26px);
+  line-height: 1.3;
+  color: var(--on-shell);
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.35s var(--ease);
 }
-.profile:first-child {
-  border-left: 0;
-  padding-left: 0;
+/* the browser's own triangle, gone in both dialects */
+.acc__q::-webkit-details-marker {
+  display: none;
 }
-.profile:last-child {
-  padding-right: 0;
+.acc__q::marker {
+  content: "";
 }
-.profile h3 {
-  /* below 24px the large-text threshold no longer applies and Bram would
-     measure 3.96:1, so these headings are set in the ink */
+.acc__q:hover {
+  color: var(--bram);
+}
+.acc__q:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+/* a plus that becomes a minus. Two hairlines, at the end of the row where
+   it reads as a control rather than as decoration. */
+.acc__mark {
+  position: relative;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+.acc__mark::before,
+.acc__mark::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  background: var(--bram);
+  transition: transform 0.4s var(--ease);
+}
+.acc__mark::after {
+  transform: rotate(90deg);
+}
+.acc__item[open] .acc__mark::after {
+  transform: rotate(0deg);
+}
+
+/* opening animates from nothing to its own height, with no fixed max to
+   guess at and nothing clipped if the copy grows */
+.acc__wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease);
+}
+.acc__item[open] .acc__wrap {
+  grid-template-rows: 1fr;
+}
+.acc__body {
+  overflow: hidden;
+  min-height: 0;
+}
+.acc__body > * {
+  color: var(--on-shell-soft);
+  max-width: 62ch;
+}
+.acc__body > *:first-child {
+  padding-top: var(--s-1);
+}
+.acc__body > *:last-child {
+  padding-bottom: clamp(var(--s-4), 2.4vw, var(--s-5));
+}
+.acc__list {
+  display: grid;
+  gap: var(--s-2);
+}
+.acc__list li {
+  padding-left: var(--s-4);
+  position: relative;
+}
+.acc__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85em;
+  width: 8px;
+  height: 1px;
+  background: var(--rule-strong);
+}
+.acc__aside {
+  margin-top: var(--s-4);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(17px, 1.4vw, 21px);
   color: var(--on-shell);
 }
-.profile__num {
-  font-family: var(--display);
-  font-size: clamp(30px, 3vw, 42px);
-  line-height: 1;
-  color: var(--on-shell-soft);
+@media (prefers-reduced-motion: reduce) {
+  .acc__wrap {
+    transition: none;
+  }
 }
-.profile p {
-  color: var(--on-shell-soft);
-  font-size: 15px;
-  max-width: 34ch;
-}
-@media (max-width: 860px) {
-  .profiles {
-    grid-template-columns: 1fr;
-  }
-  .profile {
-    border-left: 0;
-    border-top: 1px solid var(--rule);
-    padding: var(--s-5) 0;
-  }
-  .profile:first-child {
-    border-top: 0;
-  }
-  .profile p {
-    max-width: 48ch;
+@media (max-width: 560px) {
+  .acc__q {
+    gap: var(--s-4);
   }
 }
 
@@ -1130,11 +1201,8 @@ h3.display {
   .site-footer__contact a {
     transition-duration: 0.45s;
   }
-  .profile {
-    transition: background-color 0.6s var(--ease);
-  }
-  .profile:hover {
-    background-color: color-mix(in srgb, var(--taffet) 40%, transparent);
+  .acc__q {
+    transition: color 0.4s var(--ease);
   }
   .counter__unit {
     transition-property: opacity, transform;
@@ -1194,17 +1262,15 @@ h3.display {
   .countdown__inner {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
   }
-  .profiles {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  /* on paper every answer is open: a collapsed accordion prints blank */
+  .acc__wrap {
+    grid-template-rows: 1fr !important;
   }
-  .profile {
-    border-left: 1px solid var(--rule) !important;
-    border-top: 0 !important;
-    padding: var(--s-5) var(--s-4) !important;
+  .acc__body {
+    overflow: visible !important;
   }
-  .profile:first-child {
-    border-left: 0 !important;
-    padding-left: 0 !important;
+  .acc__mark {
+    display: none !important;
   }
   .story__columns {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -1226,7 +1292,7 @@ h3.display {
   }
   .hero,
   .section__head,
-  .profile,
+  .acc__item,
   .counter__unit,
   .philosophy__inner,
   .signup,
@@ -1385,40 +1451,147 @@ h3.display {
               </h2>
             </div>
             <p class="prose">
-              A few things worth knowing before the collection opens. Material
-              details for each piece will be listed on its own product page.
+              A few things worth knowing before the collection opens.
             </p>
           </div>
 
-          <ul class="profiles">
-            <li class="profile reveal">
-              <span class="profile__num">01</span>
-              <h3 class="display">Made for everyday wear</h3>
+          <div class="acc">
+            <div class="reveal">
+              <details class="acc__item" name="ziya-faq">
+                <summary class="acc__q">
+                  <span>Are ZIYA &amp; CO pieces tarnish-resistant?</span>
+                  <span class="acc__mark" aria-hidden="true"></span>
+                </summary>
+                <div class="acc__wrap">
+                  <div class="acc__body">
               <p>
-                Designed with everyday wear in mind, and made to be resistant
-                to tarnishing. Like all jewellery, proper care helps maintain
-                the finish and keeps pieces looking beautiful for longer.
-              </p>
-            </li>
-            <li class="profile reveal">
-              <span class="profile__num">02</span>
-              <h3 class="display">Ready for real life</h3>
+                  ZIYA &amp; CO jewellery is designed with everyday wear in
+                  mind and made to be resistant to tarnishing. Like all
+                  jewellery, proper care helps maintain the finish and keeps
+                  pieces looking beautiful for longer.
+                </p>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="reveal">
+              <details class="acc__item" name="ziya-faq">
+                <summary class="acc__q">
+                  <span>Is ZIYA &amp; CO jewellery waterproof?</span>
+                  <span class="acc__mark" aria-hidden="true"></span>
+                </summary>
+                <div class="acc__wrap">
+                  <div class="acc__body">
               <p>
-                Designed to handle everyday life, including occasional exposure
-                to water. Best kept away from prolonged water, swimming pools,
-                the ocean and harsh chemicals.
-              </p>
-            </li>
-            <li class="profile reveal">
-              <span class="profile__num">03</span>
-              <h3 class="display">Worn, loved, enjoyed</h3>
+                  Pieces are designed to handle everyday life, including
+                  occasional exposure to water. Keeping jewellery away from
+                  prolonged exposure to water, swimming pools, the ocean and
+                  harsh chemicals will preserve the finish.
+                </p>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="reveal">
+              <details class="acc__item" name="ziya-faq">
+                <summary class="acc__q">
+                  <span>Can I wear my jewellery every day?</span>
+                  <span class="acc__mark" aria-hidden="true"></span>
+                </summary>
+                <div class="acc__wrap">
+                  <div class="acc__body">
               <p>
-                Not saved for a special occasion. Pieces are made to be worn,
-                and a little care goes a long way: a soft dry cloth after
-                wearing, stored cool and dry.
-              </p>
-            </li>
-          </ul>
+                  Absolutely. That is what ZIYA &amp; CO is all about. The
+                  jewellery is designed to be worn, loved and enjoyed every
+                  day, not saved for a special occasion.
+                </p>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="reveal">
+              <details class="acc__item" name="ziya-faq">
+                <summary class="acc__q">
+                  <span>Will my jewellery change colour?</span>
+                  <span class="acc__mark" aria-hidden="true"></span>
+                </summary>
+                <div class="acc__wrap">
+                  <div class="acc__body">
+              <p>
+                  With proper care, your jewellery should maintain its finish.
+                  Exposure to perfume, lotions, sweat, chemicals, chlorine and
+                  moisture over time can affect the appearance of any
+                  jewellery.
+                </p>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="reveal">
+              <details class="acc__item" name="ziya-faq">
+                <summary class="acc__q">
+                  <span>Is the jewellery suitable for sensitive skin?</span>
+                  <span class="acc__mark" aria-hidden="true"></span>
+                </summary>
+                <div class="acc__wrap">
+                  <div class="acc__body">
+              <p>
+                  ZIYA &amp; CO aims to offer pieces that are comfortable for
+                  everyday wear. Material information will be listed on each
+                  product page. If you have particularly sensitive skin or
+                  known metal allergies, check the listed materials carefully.
+                </p>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="reveal">
+              <details class="acc__item" name="ziya-faq">
+                <summary class="acc__q">
+                  <span>How should I care for my jewellery?</span>
+                  <span class="acc__mark" aria-hidden="true"></span>
+                </summary>
+                <div class="acc__wrap">
+                  <div class="acc__body">
+              <ul class="acc__list">
+                  <li>
+                    Avoid direct contact with perfume, lotions and beauty
+                    products.
+                  </li>
+                  <li>Remove jewellery before swimming, bathing or exercising.</li>
+                  <li>
+                    Keep pieces away from chlorine, salt water and harsh
+                    chemicals.
+                  </li>
+                  <li>
+                    Store jewellery in a cool, dry place when it is not being
+                    worn.
+                  </li>
+                  <li>Wipe gently with a soft, dry cloth after wearing.</li>
+                </ul>
+                <p class="acc__aside">A little care goes a long way.</p>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="reveal">
+              <details class="acc__item" name="ziya-faq">
+                <summary class="acc__q">
+                  <span>How should I store my jewellery?</span>
+                  <span class="acc__mark" aria-hidden="true"></span>
+                </summary>
+                <div class="acc__wrap">
+                  <div class="acc__body">
+              <p>
+                  Store each piece separately in its ZIYA &amp; CO packaging or
+                  jewellery pouch, to prevent scratching, tangling and
+                  unnecessary exposure to moisture.
+                </p>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
         </div>
       </section>
 

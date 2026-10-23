@@ -2,7 +2,7 @@ import SiteHeader from "./components/SiteHeader";
 import Hero from "./components/Hero";
 import Story from "./components/Story";
 import Philosophy from "./components/Philosophy";
-import Audience from "./components/Audience";
+import Faq from "./components/Faq";
 import Countdown from "./components/Countdown";
 import Notify from "./components/Notify";
 import SiteFooter from "./components/SiteFooter";
@@ -18,7 +18,7 @@ export default function App() {
         <Hero />
         <Story />
         <Philosophy />
-        <Audience />
+        <Faq />
         <Countdown />
         <Notify />
       </main>

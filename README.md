@@ -128,7 +128,7 @@ src/
     SiteHeader.tsx         sticky header, anchor nav, mobile sheet
     Hero.tsx               headline, lede, actions, hero image
     Story.tsx              the brand copy, plus the statement band
-    Audience.tsx           who it is for, three columns
+    Faq.tsx                good to know, as an accordion
     Countdown.tsx          live countdown to launch
     Notify.tsx             email capture
     SiteFooter.tsx         wordmark, tagline, contact
@@ -254,13 +254,23 @@ column grid, and a picture can take the right column.
 Hero, our story, the philosophy, good to know, the countdown, early access,
 footer.
 
+**Good to know** is an accordion of seven questions, built on native
+`<details>` and `<summary>`. That buys keyboard operation and correct
+screen-reader announcement with no script at all, and the questions still
+open with JavaScript disabled. The shared `name` attribute closes one answer
+as the next opens, in browsers that support it, and is ignored elsewhere.
+Opening animates from `0fr` to `1fr` on a grid row, so no maximum height has
+to be guessed at and nothing is clipped if the copy grows. In print every
+answer is forced open, since a collapsed accordion prints blank.
+
 The page alternates ground: shell, shell, **sage**, shell, **blush**, shell,
 **sage**.
 
 All copy comes from the brand document, recast out of first person into a
 biography of the business that speaks to the reader. The "good to know"
-section is drawn from the FAQ and care notes, with the hedging left exactly
-as written ("made to be resistant to tarnishing", not "will not tarnish").
+accordion carries the FAQ and the care notes in full, with the hedging left
+exactly as written ("made to be resistant to tarnishing", not "will not
+tarnish").
 
 The document also contains full shipping, returns, privacy and terms copy.
 None of it is on this page: those are store pages for when the shop opens,
