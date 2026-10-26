@@ -11,7 +11,7 @@ export default function Philosophy() {
           <p className="label">The philosophy</p>
           <Typed className="philosophy__line" segments={LINE} onView speed={58} />
           <p className="philosophy__support">
-            Our hope is that when you put on your ZIYA &amp; CO jewellery, you
+            My hope is that when you put on your ZIYA &amp; CO jewellery, you
             feel amazing. You feel beautiful. You feel like you, just a little
             more elevated.
           </p>

@@ -1,15 +1,16 @@
 import Reveal from "./Reveal";
 
-/* Copy is the brand document's "About ZIYA & CO", kept word for word in the
-   founder's own voice. The only changes are the em dashes, which are resolved
-   into sentences, and one double space. */
+/* Copy is the brand document's "About ZIYA & CO". The voice is Ziyanda
+   speaking, first person singular throughout: the document's "we believe"
+   and "every piece is chosen" are hers, so they are "I believe" and "I
+   choose" here. The em dashes are resolved into sentences. */
 export default function Story() {
   return (
     <section className="section" id="story">
       <div className="container">
         <Reveal className="section__head">
           <div>
-            <p className="label">Our story</p>
+            <p className="label">My story</p>
             <h2 className="display">
               Why should that feeling be reserved for special occasions?
             </h2>
@@ -28,7 +29,7 @@ export default function Story() {
         <div className="story__columns">
           <Reveal>
             <p>
-              We believe jewellery is meant to be lived in. To be worn on
+              I believe jewellery is meant to be lived in. To be worn on
               ordinary days, on big days, on days when you&rsquo;re dressed up
               and days when you&rsquo;re simply running errands. Because you
               deserve to feel beautiful every day, not just when
@@ -37,7 +38,7 @@ export default function Story() {
           </Reveal>
           <Reveal delay={110}>
             <p>
-              Every piece is chosen with the intention of adding a little
+              I choose every piece with the intention of adding a little
               something to your day. A little sparkle, a little confidence, a
               little joy.
             </p>

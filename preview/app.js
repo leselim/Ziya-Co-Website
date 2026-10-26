@@ -342,7 +342,7 @@
       if (busy) return; // no double submissions while one is in flight
 
       if (trap && trap.value) {
-        setStatus("Thank you. We will write to you on 9 December.");
+        setStatus("Thank you. I’ll write to you on 9 December.");
         form.reset();
         return;
       }
@@ -359,7 +359,7 @@
       if (!ENDPOINT) {
         window.location.href = mailtoFor(value);
         setStatus(
-          "Almost there. We have opened an email for you, ready to send. " +
+          "Almost there. I’ve opened an email for you, ready to send. " +
             "If nothing appeared, write to " + CONTACT + "."
         );
         return;
@@ -399,11 +399,11 @@
             throw new Error(String(payload.error || "rejected"));
           }
           form.reset();
-          setStatus("Thank you. We will write to you on 9 December.");
+          setStatus("Thank you. I’ll write to you on 9 December.");
         })
         .catch(function () {
           setStatus(
-            "Something went wrong on our side. Please try again, or write " +
+            "Something went wrong on my side. Please try again, or write " +
               "to " + CONTACT + ".",
             "error"
           );

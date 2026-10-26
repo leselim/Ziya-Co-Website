@@ -1,14 +1,17 @@
 import Reveal from "./Reveal";
 
-/* The brand document's FAQ and care notes, word for word. The hedging is kept
-   exactly as written: "made to be resistant to tarnishing", never "will not
-   tarnish". Only the em dashes and one double space are changed. */
+/* The brand document's FAQ and care notes, in Ziyanda's own voice: first
+   person singular, as if she is answering you. "We recommend" is "I
+   recommend"; "our jewellery" becomes "every piece", because a "my" here
+   would read as the customer's own ("Can I wear my jewellery every day?").
+   The hedging is kept exactly as written: "made to be resistant to
+   tarnishing", never "will not tarnish". */
 const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "Are ZIYA & CO pieces tarnish-resistant?",
     a: (
       <p>
-        Our jewellery is designed with everyday wear in mind and is made to be
+        Every piece is designed with everyday wear in mind and is made to be
         resistant to tarnishing. However, like all jewellery, proper care will
         help maintain its finish and keep your pieces looking beautiful for
         longer.
@@ -19,8 +22,8 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     q: "Is ZIYA & CO jewellery waterproof?",
     a: (
       <p>
-        Our pieces are designed to handle everyday life, including occasional
-        exposure to water. However, we recommend keeping your jewellery away
+        Every piece is designed to handle everyday life, including occasional
+        exposure to water. However, I recommend keeping your jewellery away
         from prolonged exposure to water, swimming pools, the ocean and harsh
         chemicals to preserve its finish.
       </p>
@@ -30,7 +33,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     q: "Can I wear my jewellery every day?",
     a: (
       <p>
-        Absolutely. That&rsquo;s what ZIYA &amp; CO is all about. Our jewellery
+        Absolutely. That&rsquo;s what ZIYA &amp; CO is all about. Every piece
         is designed to be worn, loved and enjoyed every day, not saved for a
         special occasion.
       </p>
@@ -50,10 +53,10 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     q: "Is your jewellery suitable for sensitive skin?",
     a: (
       <p>
-        We aim to offer pieces that are comfortable for everyday wear. Please
+        I aim to offer pieces that are comfortable for everyday wear. Please
         refer to the material information provided on each product page before
         purchasing. If you have particularly sensitive skin or known metal
-        allergies, we recommend checking the listed materials carefully.
+        allergies, I recommend checking the listed materials carefully.
       </p>
     ),
   },
@@ -80,7 +83,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     q: "How should I store my jewellery?",
     a: (
       <p>
-        We recommend storing each piece separately in its ZIYA &amp; CO
+        I recommend storing each piece separately in its ZIYA &amp; CO
         packaging or jewellery pouch to prevent scratching, tangling and
         unnecessary exposure to moisture.
       </p>
@@ -96,11 +99,11 @@ export default function Faq() {
           <div>
             <p className="label">Good to know</p>
             <h2 className="display">
-              Our jewellery is made to be worn, not saved
+              Made to be worn, not saved
             </h2>
           </div>
           <p className="prose">
-            A few things worth knowing before we open.
+            A few things I&rsquo;d like you to know before opening day.
           </p>
         </Reveal>
 

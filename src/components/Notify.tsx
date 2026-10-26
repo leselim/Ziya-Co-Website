@@ -32,7 +32,7 @@ export default function Notify() {
     if (trap.current?.value) {
       /* Answer a bot exactly as we answer a person, and send nothing. */
       setTone("info");
-      setStatus("Thank you. We will write to you on 9 December.");
+      setStatus("Thank you. I’ll write to you on 9 December.");
       setEmail("");
       return;
     }
@@ -48,7 +48,7 @@ export default function Notify() {
       window.location.href = mailtoFor(value);
       setTone("info");
       setStatus(
-        "Almost there. We have opened an email for you, ready to send. " +
+        "Almost there. I’ve opened an email for you, ready to send. " +
           `If nothing appeared, write to ${CONTACT_EMAIL}.`
       );
       return;
@@ -84,11 +84,11 @@ export default function Notify() {
       }
 
       setEmail("");
-      setStatus("Thank you. We will write to you on 9 December.");
+      setStatus("Thank you. I’ll write to you on 9 December.");
     } catch {
       setTone("error");
       setStatus(
-        "Something went wrong on our side. Please try again, or write to " +
+        "Something went wrong on my side. Please try again, or write to " +
           `${CONTACT_EMAIL}.`
       );
     } finally {
@@ -103,9 +103,9 @@ export default function Notify() {
           <p className="label">Early access</p>
           <h2 className="display">Be first to wear it</h2>
           <p>
-            Leave your email and we will send you one note when ZIYA &amp; CO
-            opens on {LAUNCH_LABEL}. Nothing before it, and nothing after it
-            you did not ask for.
+            Leave your email and I&rsquo;ll send you one note when ZIYA &amp;
+            CO opens on {LAUNCH_LABEL}. Nothing before it, and nothing after it
+            you didn&rsquo;t ask for.
           </p>
         </div>
 
@@ -161,9 +161,9 @@ export default function Notify() {
           </p>
 
           <p className="signup__privacy" id="signup-privacy">
-            We use your address for the launch note only. You can unsubscribe
-            from any message, or write to {CONTACT_EMAIL} to be removed. See our
-            privacy policy for how we handle your personal information.
+            I use your address for the launch note only. You can unsubscribe
+            from any message, or write to {CONTACT_EMAIL} to be removed. See the
+            privacy policy for how I handle your personal information.
           </p>
         </form>
       </div>

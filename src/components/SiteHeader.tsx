@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Wordmark from "./Wordmark";
 
 const links = [
-  { href: "#story", label: "Our Story" },
+  { href: "#story", label: "My Story" },
   { href: "#philosophy", label: "The Philosophy" },
   { href: "#notify", label: "Early Access" },
 ];

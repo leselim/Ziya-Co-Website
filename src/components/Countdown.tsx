@@ -28,7 +28,7 @@ export default function Countdown() {
         <Reveal>
           {done ? (
             <p className="countdown__launched">
-              ZIYA &amp; CO is open. Thank you for waiting with us.
+              ZIYA &amp; CO is open. Thank you for waiting with me.
             </p>
           ) : (
             <ol className="counter" aria-hidden="true">
