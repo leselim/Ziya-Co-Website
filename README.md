@@ -123,13 +123,13 @@ src/
   config.ts                launch date, contact address, signup endpoint
   components/
     SiteHeader.tsx         sticky header, anchor nav, mobile sheet
-    Hero.tsx               headline, lede, actions, hero image
+    Hero.tsx               headline, rule, actions
     Story.tsx              the brand copy, plus the statement band
     Faq.tsx                good to know, as an accordion
     Countdown.tsx          live countdown to launch
     Notify.tsx             email capture
     SiteFooter.tsx         wordmark, tagline, contact
-    Wordmark.tsx           ZIYA & CO, with the italic swash ampersand
+    Wordmark.tsx           ZIYA & CO, ampersand upright in the display face
     Reveal.tsx             fade-up on first sight
   hooks/
     useCountdown.ts        ticks once a second, stops at zero
@@ -235,8 +235,8 @@ image panel and the header monogram.
 
 `public/img/` still holds `hero.jpg`, `hero.webp` and the monogram files. They
 are unreferenced but kept deliberately: the layout has room for photography
-to return without restructuring. The hero's `.hero__foot` is already a two
-column grid, and a picture can take the right column.
+to return without restructuring. The hero carries only its headline, rule and
+actions, so the space beside them is free for a picture.
 
 ## Page structure
 

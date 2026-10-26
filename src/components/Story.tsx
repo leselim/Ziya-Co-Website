@@ -12,10 +12,12 @@ export default function Story() {
             </h2>
           </div>
           <p className="prose">
-            At ZIYA &amp; CO, jewellery has always been more than an accessory.
-            There is something about the perfect pair of earrings, a delicate
-            bracelet, a necklace that somehow makes you feel a little more
-            beautiful, a little more confident, and completely yourself.
+            ZIYA &amp; CO was created from a place of love. A deep, undeniable
+            love for jewellery and the way it makes you feel. Jewellery has
+            always been more than an accessory. There is something about the
+            perfect pair of earrings, a delicate bracelet, a necklace that
+            somehow makes you feel a little more beautiful, a little more
+            confident, and completely yourself.
           </p>
         </Reveal>
 

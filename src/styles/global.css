@@ -232,12 +232,6 @@ h3.display {
   letter-spacing: -0.005em;
 }
 
-.lede {
-  font-size: clamp(17px, 1.35vw, 20px);
-  line-height: 1.7;
-  color: var(--on-ivory-soft);
-  max-width: 36ch;
-}
 .prose {
   color: var(--on-ivory-soft);
   max-width: 44ch;
@@ -342,8 +336,9 @@ h3.display {
   white-space: nowrap;
   flex: none;
 }
+/* the ampersand is set upright, in the same face as the rest of the
+   wordmark. Only the tracking is eased, which is optical, not a style. */
 .wordmark .amp {
-  font-style: italic;
   letter-spacing: 0.14em;
 }
 
@@ -498,11 +493,11 @@ h3.display {
   background: var(--rule);
   margin-block: clamp(var(--s-5), 5vw, var(--s-7));
 }
+/* the actions alone now: the opening passage moved to Our Story, where it
+   sits with the rest of that thought rather than split across two sections */
 .hero__foot {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, auto);
-  gap: clamp(var(--s-5), 5vw, var(--s-7));
-  align-items: end;
+  display: flex;
+  align-items: center;
 }
 .hero__actions {
   display: flex;
@@ -513,11 +508,6 @@ h3.display {
 @media (max-width: 860px) {
   .hero h1 {
     max-width: 15ch;
-  }
-  .hero__foot {
-    grid-template-columns: 1fr;
-    align-items: start;
-    gap: var(--s-5);
   }
 }
 @media (max-width: 560px) {
@@ -610,9 +600,6 @@ h3.display {
   max-width: 17ch;
   text-wrap: balance;
   margin-top: clamp(var(--s-5), 4vw, var(--s-6));
-}
-.philosophy__line .amp {
-  font-style: italic;
 }
 .philosophy__support {
   margin-top: clamp(var(--s-5), 4vw, var(--s-6));
@@ -1240,7 +1227,6 @@ h3.display {
     padding-block: 6px !important;
     border-bottom: 0 !important;
   }
-  .hero__foot,
   .section__head,
   .notify__inner,
   .countdown__inner {
