@@ -292,7 +292,7 @@
           hours +
           " hours and " +
           minutes +
-          " minutes until Ziya and Co. opens on 9 December 2026.";
+          " minutes until Ziya and Co opens on 9 December 2026.";
       }
       return true;
     }

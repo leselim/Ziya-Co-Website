@@ -1,5 +1,8 @@
 import Reveal from "./Reveal";
 
+/* Copy is the brand document's "About ZIYA & CO", kept word for word in the
+   founder's own voice. The only changes are the em dashes, which are resolved
+   into sentences, and one double space. */
 export default function Story() {
   return (
     <section className="section" id="story">
@@ -13,22 +16,23 @@ export default function Story() {
           </div>
           <p className="prose">
             ZIYA &amp; CO was created from a place of love. A deep, undeniable
-            love for jewellery and the way it makes you feel. Jewellery has
-            always been more than an accessory. There is something about the
-            perfect pair of earrings, a delicate bracelet, a necklace that
-            somehow makes you feel a little more beautiful, a little more
-            confident, and completely yourself.
+            love for jewellery and the way it makes you feel. For me, jewellery
+            has always been more than just an accessory. There&rsquo;s something
+            about putting on that perfect pair of earrings, slipping on a
+            delicate bracelet or adding a necklace that somehow makes you feel a
+            little more beautiful, a little more confident, and completely
+            yourself. And I wanted to share that feeling.
           </p>
         </Reveal>
 
         <div className="story__columns">
           <Reveal>
             <p>
-              ZIYA &amp; CO believes jewellery is meant to be lived in. Worn on
-              ordinary days and on big ones, on days you are dressed up and
-              days you are simply running errands. Because you deserve to feel
-              beautiful every day, not only when there is somewhere special to
-              go.
+              We believe jewellery is meant to be lived in. To be worn on
+              ordinary days, on big days, on days when you&rsquo;re dressed up
+              and days when you&rsquo;re simply running errands. Because you
+              deserve to feel beautiful every day, not just when
+              there&rsquo;s somewhere special to go.
             </p>
           </Reveal>
           <Reveal delay={110}>
@@ -42,7 +46,7 @@ export default function Story() {
 
         <Reveal>
           <p className="story__close">
-            Because sometimes, the smallest details make you feel the most
+            Because sometimes, the smallest details can make you feel the most
             special
           </p>
         </Reveal>

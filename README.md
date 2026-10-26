@@ -255,11 +255,19 @@ answer is forced open, since a collapsed accordion prints blank.
 The page alternates ground: ivory, ivory, **espresso**, ivory, **blush**,
 ivory, **espresso**.
 
-All copy comes from the brand document, recast out of first person into a
-biography of the business that speaks to the reader. The "good to know"
-accordion carries the FAQ and the care notes in full, with the hedging left
-exactly as written ("made to be resistant to tarnishing", not "will not
-tarnish").
+All copy comes from the brand document, kept word for word in its own voice.
+That voice is first person and it shifts partway through, exactly as written:
+the opening is the founder speaking ("For me", "And I wanted to share that
+feeling") and from "We believe jewellery is meant to be lived in" onwards it
+is the brand. Both are deliberate; don't flatten one into the other without
+asking.
+
+Two kinds of edit were made to the document text, and no others. The em dashes
+are resolved into sentences ("every day — not just when" becomes "every day,
+not just when"), and one double space was closed up. The hedging is left
+exactly as written ("made to be resistant to tarnishing", never "will not
+tarnish"), and the "good to know" accordion carries the FAQ and care notes in
+full.
 
 The document also contains full shipping, returns, privacy and terms copy.
 None of it is on this page: those are store pages for when the shop opens,
