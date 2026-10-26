@@ -5,39 +5,44 @@
 
    Every colour below is measured against the surface it actually sits on.
    Three results shaped this system:
-     warm taupe  on warm ivory   4.01:1  — not safe for small text
-     muted gold  on warm ivory   2.43:1  — not safe for any text
-     champagne   on warm ivory   1.20:1  — too close to stand alone as a plane
-   So taupe and gold set rules rather than words on the light ground, the
-   champagne band is edged with a hairline, and secondary copy is the ink
-   held back to 72%, which measures 5.86:1.
+     gold    on the ivory ground   3.13:1  — not safe for any text
+     bronze  on the ivory ground   5.48:1  — the gold deepened, safe for labels
+     gold    on espresso           4.18:1  — short of AA, so dark-section
+                                             labels take the lifted gold
+   So the gold sets fills, rules and marks rather than words, labels on the
+   light ground are bronze, labels on the dark bands are the lifted gold, and
+   secondary copy is a warm grey that measures 5.41:1.
    ========================================================================= */
 
 /* ---------- tokens ---------- */
 :root {
-  /* palette — built from the two brand colours, Taffet and Bram.
-
-     Bram cannot carry small text on Taffet: the two measure 3.13:1 against
-     each other, which is large display type only. Bram is no better as a
-     background — even pure white reaches just 4.41:1 on it. So Bram appears
-     at full strength where it is large or decorative, and is lightened into
-     the ground and deepened for the dark band and for body copy. */
-  --taffet: #f0d4c3; /* the brand blush, as a supporting band        */
-  --bram: #6c7b7b; /* the brand sage: large display type and rules   */
-  --shell: #faf1ea; /* Taffet lightened, the page ground             */
-  --sage-deep: #4e5a5a; /* Bram deepened, the dark sections          */
-  --ink: #3a4444; /* Bram at its deepest, for body copy              */
+  /* palette — a warm ivory ground, a blush band, espresso for the dark
+     sections, and a single gold accent carried through in three
+     strengths: lifted for labels on espresso, flat for fills and rules,
+     deepened to bronze for labels on the light ground. */
+  --ivory: #f8f7f3; /* the page ground                                */
+  --cream: #fcfbf7; /* type on the espresso bands and on the buttons  */
+  --blush: #f2e2d5; /* the warm band                                  */
+  --clay: #d6ccc0; /* hairlines on the light ground                   */
+  --gold-lift: #b89a68; /* the gold lifted, for labels on espresso    */
+  --gold: #a88752; /* the accent: fills, rules and marks              */
+  --bronze: #7d5f3d; /* the gold deepened, for labels on light        */
+  --espresso: #332a22; /* the dark sections                           */
+  --ink: #2a2420; /* headings and body copy on the light ground       */
+  --ink-soft: #70635a; /* secondary copy on the light ground          */
 
   /* type colours, by the surface they sit on */
-  --on-shell: var(--ink); /* body on the ground         9.01:1 */
-  --on-shell-soft: color-mix(in srgb, var(--ink) 78%, transparent); /* 6.18:1 */
-  --display-ink: var(--bram); /* large headings only    3.96:1 */
-  --on-taffet: var(--ink); /* body on the blush band    ~7.1:1 */
-  --on-dark: var(--shell); /* body on the sage band     6.42:1 */
-  --on-dark-soft: var(--taffet); /* on the sage band    5.08:1 */
-  --rule: color-mix(in srgb, var(--bram) 34%, transparent);
-  --rule-strong: color-mix(in srgb, var(--bram) 60%, transparent);
-  --on-dark-rule: color-mix(in srgb, var(--taffet) 40%, transparent);
+  --on-ivory: var(--ink); /* body on the ground        14.28:1 */
+  --on-ivory-soft: var(--ink-soft); /* secondary copy   5.41:1 */
+  --display-ink: var(--ink); /* headings: the gold is decorative here */
+  --label-ink: var(--bronze); /* labels on light        5.48:1 */
+  --on-blush: var(--ink); /* body on the blush band    12.11:1 */
+  --on-dark: var(--cream); /* body on espresso         13.57:1 */
+  --on-dark-soft: var(--blush); /* on espresso         11.11:1 */
+  --on-dark-label: var(--gold-lift); /* labels there    5.26:1 */
+  --rule: color-mix(in srgb, var(--clay) 88%, transparent);
+  --rule-strong: color-mix(in srgb, var(--gold) 62%, transparent);
+  --on-dark-rule: color-mix(in srgb, var(--gold-lift) 42%, transparent);
 
   /* type */
   --display: "Cormorant Garamond", Cormorant, Garamond, "EB Garamond",
@@ -98,7 +103,7 @@ html {
 }
 body {
   margin: 0;
-  background: var(--shell);
+  background: var(--ivory);
   color: var(--ink);
   font-family: var(--sans);
   font-weight: 300;
@@ -138,7 +143,7 @@ a {
 .on-dark :focus-visible,
 .philosophy :focus-visible,
 .site-footer :focus-visible {
-  outline-color: var(--taffet);
+  outline-color: var(--blush);
 }
 
 .sr-only {
@@ -159,7 +164,7 @@ a {
   top: -100px;
   z-index: 100;
   background: var(--ink);
-  color: var(--shell);
+  color: var(--ivory);
   padding: var(--s-2) var(--s-4);
   font-size: 12px;
   letter-spacing: 0.16em;
@@ -181,8 +186,9 @@ a {
   padding-inline: var(--pad);
 }
 
-/* small uppercase label. Never gold on the light ground: it measures
-   2.43:1 there. Gold is kept for the rules beside it. */
+/* small uppercase label. Never the flat gold on the light ground: it
+   measures 3.13:1 there. The gold is deepened to bronze instead, which
+   reads the same at a glance and measures 5.48:1. */
 .label {
   display: block;
   font-size: 11px;
@@ -190,23 +196,23 @@ a {
   letter-spacing: 0.26em;
   text-transform: uppercase;
   font-weight: 400;
-  color: var(--on-shell-soft);
+  color: var(--label-ink);
 }
 /* no rule, no dash, no mark of any kind before a label: the tracking and
    the space around it do the work on their own */
 .on-dark .label,
 .philosophy .label,
 .site-footer .label {
-  /* Bram on the sage band is barely a shade apart, so labels there take
-     the Taffet, which reads 5.08:1 */
-  color: var(--on-dark-soft);
+  /* bronze disappears into the espresso, so the gold goes the other way
+     here and lifts, which reads 5.26:1 */
+  color: var(--on-dark-label);
 }
 
 .display {
   font-family: var(--display);
   font-weight: 400;
-  /* Bram, at full strength. It measures 3.96:1 on the ground, which carries
-     large type only, so nothing below 24px is ever set in it. */
+  /* the ink, not the gold. Headings carry the page, so they take the colour
+     that measures 14.28:1; the gold stays decorative, on rules and marks. */
   color: var(--display-ink);
   text-wrap: balance;
 }
@@ -229,11 +235,11 @@ h3.display {
 .lede {
   font-size: clamp(17px, 1.35vw, 20px);
   line-height: 1.7;
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
   max-width: 36ch;
 }
 .prose {
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
   max-width: 44ch;
 }
 
@@ -244,9 +250,11 @@ h3.display {
   justify-content: center;
   height: 54px;
   padding-inline: var(--s-5);
-  border: 1px solid var(--sage-deep);
-  background: var(--sage-deep);
-  color: var(--shell);
+  /* the bronze, not the flat gold: cream on the gold is 3.24:1, on the
+     bronze 5.67:1, and the bronze is the same accent one step down */
+  border: 1px solid var(--bronze);
+  background: var(--bronze);
+  color: var(--cream);
   font-family: var(--sans);
   font-weight: 400;
   font-size: 12px;
@@ -259,7 +267,7 @@ h3.display {
 }
 .btn:hover:not([disabled]) {
   background: transparent;
-  color: var(--sage-deep);
+  color: var(--bronze);
 }
 .btn[disabled] {
   opacity: 0.5;
@@ -272,7 +280,7 @@ h3.display {
 }
 .btn--line:hover:not([disabled]) {
   background: var(--ink);
-  color: var(--shell);
+  color: var(--ivory);
   border-color: var(--ink);
 }
 
@@ -296,7 +304,7 @@ h3.display {
   bottom: 0;
   width: 100%;
   height: 1px;
-  background: var(--bram);
+  background: var(--gold);
   transform-origin: left;
   transition: transform 0.3s var(--ease);
 }
@@ -315,7 +323,7 @@ h3.display {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--shell);
+  background: var(--ivory);
   border-bottom: 1px solid var(--rule);
 }
 .site-header__inner {
@@ -351,7 +359,7 @@ h3.display {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 400;
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
   position: relative;
   padding-block: 6px;
   transition: color 0.25s var(--ease);
@@ -366,7 +374,7 @@ h3.display {
   bottom: 0;
   width: 100%;
   height: 1px;
-  background: var(--bram);
+  background: var(--gold);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s var(--ease);
@@ -440,7 +448,7 @@ h3.display {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: var(--shell);
+    background: var(--ivory);
     border-bottom: 1px solid var(--rule);
     padding: var(--s-2) var(--pad) var(--s-5);
     margin-left: 0;
@@ -463,11 +471,11 @@ h3.display {
     height: 54px;
     /* `.nav a` sets the link colour and outranks `.btn`, which would leave
        this label dark on its own dark fill. Say it again here. */
-    color: var(--shell);
-    border-bottom: 1px solid var(--sage-deep);
+    color: var(--ivory);
+    border-bottom: 1px solid var(--espresso);
   }
   .nav > .btn:hover {
-    color: var(--sage-deep);
+    color: var(--espresso);
   }
   .site-header__inner > .btn {
     display: none;
@@ -557,7 +565,7 @@ h3.display {
   border-top: 1px solid var(--rule);
 }
 .story__columns p {
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
   max-width: 46ch;
 }
 /* the close is a line, not another paragraph */
@@ -584,7 +592,7 @@ h3.display {
 
 /* ---------- philosophy ---------- */
 .philosophy {
-  background: var(--sage-deep);
+  background: var(--espresso);
   color: var(--on-dark);
 }
 .philosophy__inner {
@@ -638,7 +646,7 @@ h3.display {
   font-family: var(--display);
   font-size: clamp(20px, 1.9vw, 26px);
   line-height: 1.3;
-  color: var(--on-shell);
+  color: var(--on-ivory);
   cursor: pointer;
   list-style: none;
   transition: color 0.35s var(--ease);
@@ -651,7 +659,9 @@ h3.display {
   content: "";
 }
 .acc__q:hover {
-  color: var(--bram);
+  /* the bronze, not the flat gold: this is a question being read, and the
+     gold would drop it to 3.13:1 on hover */
+  color: var(--bronze);
 }
 .acc__q:focus-visible {
   outline: 2px solid var(--ink);
@@ -674,7 +684,7 @@ h3.display {
   top: 50%;
   width: 16px;
   height: 1px;
-  background: var(--bram);
+  background: var(--gold);
   transition: transform 0.4s var(--ease);
 }
 .acc__mark::after {
@@ -699,7 +709,7 @@ h3.display {
   min-height: 0;
 }
 .acc__body > * {
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
   max-width: 62ch;
 }
 .acc__body > *:first-child {
@@ -730,7 +740,7 @@ h3.display {
   font-family: var(--display);
   font-style: italic;
   font-size: clamp(17px, 1.4vw, 21px);
-  color: var(--on-shell);
+  color: var(--on-ivory);
 }
 @media (prefers-reduced-motion: reduce) {
   .acc__wrap {
@@ -744,10 +754,10 @@ h3.display {
 }
 
 /* ---------- countdown ----------
-   The champagne band. It sits only 1.20:1 from the ivory, so it is edged
+   The blush band. It sits only 1.18:1 from the ivory, so it is edged
    top and bottom to read as a deliberate plane rather than a misprint. */
 .countdown {
-  background: var(--taffet);
+  background: var(--blush);
   border-block: 1px solid var(--rule);
 }
 .countdown__inner {
@@ -758,11 +768,13 @@ h3.display {
   align-items: center;
 }
 .countdown .label {
-  color: var(--on-taffet);
+  /* bronze holds on the blush band too, at 4.65:1, so every label on a
+     light ground is the same colour */
+  color: var(--label-ink);
 }
 .countdown h2 {
-  /* Bram on Taffet is 3.13:1, so the heading on this band is the ink */
-  color: var(--on-taffet);
+  /* the gold reads 2.66:1 on the blush, so the heading here is the ink */
+  color: var(--on-blush);
   margin-top: var(--s-4);
   max-width: 17ch;
 }
@@ -770,7 +782,7 @@ h3.display {
   margin-top: var(--s-4);
   /* the blush band is light enough that a held-back ink drops to 3.72:1,
      so everything small on it is set in the ink at full strength */
-  color: var(--on-taffet);
+  color: var(--on-blush);
   max-width: 34ch;
 }
 .counter {
@@ -798,7 +810,7 @@ h3.display {
   font-size: 10px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--on-taffet);
+  color: var(--on-blush);
 }
 .countdown__launched {
   font-family: var(--display);
@@ -830,7 +842,7 @@ h3.display {
   max-width: 15ch;
 }
 .notify__copy p {
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
   max-width: 40ch;
   margin-top: var(--s-4);
 }
@@ -843,7 +855,7 @@ h3.display {
   font-size: 11px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
 }
 .signup__row {
   display: flex;
@@ -873,7 +885,7 @@ h3.display {
   border-radius: 0;
 }
 .signup input[type="email"]::placeholder {
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
   opacity: 1;
 }
 .signup input[type="email"]:focus {
@@ -891,7 +903,7 @@ h3.display {
 }
 .signup .btn:hover:not([disabled]) {
   background: transparent;
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
 }
 /* the honeypot is for robots; it must never be seen or focused */
 .signup__trap {
@@ -927,7 +939,7 @@ h3.display {
   display: inline-block;
   width: 14px;
   height: 1px;
-  background: var(--bram);
+  background: var(--gold);
   vertical-align: middle;
   margin-right: 10px;
 }
@@ -935,7 +947,7 @@ h3.display {
 .signup__privacy {
   font-size: 13px;
   line-height: 1.65;
-  color: var(--on-shell-soft);
+  color: var(--on-ivory-soft);
   max-width: 46ch;
 }
 .signup__privacy {
@@ -964,15 +976,15 @@ h3.display {
     margin-top: var(--s-4);
     height: 54px;
     padding-inline: var(--s-4);
-    border: 1px solid var(--sage-deep);
-    background: var(--sage-deep);
-    color: var(--shell);
+    border: 1px solid var(--bronze);
+    background: var(--bronze);
+    color: var(--cream);
   }
 }
 
 /* ---------- footer ---------- */
 .site-footer {
-  background: var(--sage-deep);
+  background: var(--espresso);
   color: var(--on-dark-soft);
   padding-block: clamp(var(--s-6), 7vw, var(--s-8)) var(--s-6);
 }
@@ -985,7 +997,7 @@ h3.display {
   border-bottom: 1px solid var(--on-dark-rule);
 }
 .site-footer .wordmark {
-  color: var(--shell);
+  color: var(--ivory);
 }
 .site-footer__tagline {
   font-size: 11px;
@@ -1002,13 +1014,13 @@ h3.display {
 .site-footer__contact a {
   font-size: 14px;
   letter-spacing: 0.04em;
-  color: var(--shell);
-  border-bottom: 1px solid var(--bram);
+  color: var(--ivory);
+  border-bottom: 1px solid var(--gold);
   padding-bottom: 3px;
   transition: border-color 0.25s var(--ease);
 }
 .site-footer__contact a:hover {
-  border-color: var(--taffet);
+  border-color: var(--blush);
 }
 .site-footer__base {
   display: flex;
@@ -1065,7 +1077,7 @@ h3.display {
   height: 0.82em;
   margin-left: 0.07em;
   vertical-align: -0.06em;
-  background: var(--bram);
+  background: var(--gold);
   animation: caret 1.1s steps(1, end) infinite;
 }
 .typed[data-done="true"] .typed__out::after {
@@ -1195,7 +1207,7 @@ h3.display {
     scroll-behavior: auto;
   }
   body {
-    background: var(--shell);
+    background: var(--ivory);
   }
   .site-header {
     position: static;

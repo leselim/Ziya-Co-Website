@@ -3,12 +3,9 @@
 A single-page coming-soon site for Ziya & Co., launching **9 December 2026**.
 React + TypeScript + Vite, with a live countdown and an email-capture form.
 
-Built to the Ziya & Co. brand guidelines, Volume 01: Warm Ivory ground,
-Bodoni Moda for the voice, Montserrat for the facts, and Muted Gold used only
-as a graphic accent. Nothing is rounded and nothing casts a shadow.
-
-The dark is taupe rather than the guidelines' Deep Chocolate. See **The
-palette** below for what that changed and why.
+A warm ivory ground, blush bands, espresso for the dark sections, and a
+single gold accent carried through in three strengths. Nothing is rounded and
+nothing casts a shadow. See **The palette** below.
 
 ---
 
@@ -148,51 +145,44 @@ Ziya-and-Co-Coming-Soon-preview.html    self-contained preview, no build needed
 
 ## The palette
 
-Built from the two brand colours, Taffet and Bram.
-
 ```
---taffet     #f0d4c3   the brand blush, as a supporting band
---bram       #6c7b7b   the brand sage: large display type and rules
---shell      #faf1ea   Taffet lightened, the page ground
---sage-deep  #4e5a5a   Bram deepened, the dark sections
---ink        #3a4444   Bram at its deepest, for body copy
+--ivory      #f8f7f3   the page ground
+--cream      #fcfbf7   type on the espresso bands and on the buttons
+--blush      #f2e2d5   the warm band
+--clay       #d6ccc0   hairlines on the light ground
+--gold-lift  #b89a68   the gold lifted, for labels on espresso
+--gold       #a88752   the accent: fills, rules and marks
+--bronze     #7d5f3d   the gold deepened, for labels on light
+--espresso   #332a22   the dark sections
+--ink        #2a2420   headings and body copy on the light ground
+--ink-soft   #70635a   secondary copy on the light ground
 ```
 
-The two supplied colours cannot carry the site on their own, and the
-measurements say why:
+One accent runs through the page at three strengths, because the flat gold
+cannot carry text on either ground:
 
 | | |
 |---|---|
-| Bram on Taffet | **3.13:1** — large display type only |
-| Bram as a background, with Taffet on it | **3.13:1** — same |
-| Bram as a background, with pure white on it | **4.41:1** — still short of AA |
+| gold on ivory | **3.13:1** — rules, fills and marks, never words |
+| gold on espresso | **4.18:1** — short of AA, so labels there lift |
+| bronze on ivory | **5.48:1** — the gold deepened, so labels can be set in it |
+| gold-lift on espresso | **5.26:1** — the gold lifted, for labels on the dark bands |
 
-So Bram appears at full strength wherever it is large or decorative: the hero
-and section headings, the rules, the hairlines. It is lightened into the page
-ground and deepened for the dark sections and for body copy. Both brand
-colours are present untouched, as the blush band and as the headings.
+So the gold sets the hairlines, the accordion marks and the caret; **bronze
+sets the small labels and the button fills** on the light ground; and
+**gold-lift sets the labels** inside the espresso sections.
 
-Two consequences worth knowing if the palette is edited:
+Three consequences worth knowing if the palette is edited:
 
-1. **Nothing under 24px is ever set in Bram.** On the ground it measures
-   3.96:1, which carries large text and nothing else. The profile headings
-   clamp to 25px on a phone, so they are set in the ink rather than Bram.
-2. **Small text on the blush band takes the ink at full strength.** Held back
-   even to 78% it drops to 4.26:1 there.
+1. **Headings are the ink, not the accent.** At 14.28:1 they carry the page;
+   the gold stays decorative throughout.
+2. **Buttons are bronze, not gold.** Cream on the flat gold is 3.24:1 and
+   fails; on the bronze it is 5.67:1.
+3. **The blush band is edged top and bottom** with a hairline. It sits only
+   1.18:1 from the ivory, so without the rules it reads as a misprint rather
+   than a deliberate plane. Labels there stay bronze, at 4.65:1.
 
----|---|---|
-| warm taupe `#81766a` | 4.01:1 | below AA for small text |
-| muted gold `#b49a72` | 2.43:1 | below AA for any text |
-| soft champagne `#e8ded0` | 1.20:1 | too close to stand alone as a plane |
-
-So **taupe and gold set rules rather than words** on the light ground, the
-**champagne band is edged top and bottom** with a hairline so it reads as a
-deliberate plane rather than a misprint, and **secondary copy is the ink held
-back to 72%**, which measures 5.86:1.
-
-Gold does set type in one place: on espresso it reads 5.76:1, so the small
-labels inside the dark sections are gold. On espresso, body copy is champagne
-at 11.66:1 and headings are ivory at 14.03:1.
+On espresso, body copy is blush at 11.11:1 and headings are cream at 13.57:1.
 
 ---
 
@@ -212,11 +202,10 @@ composition is held whatever the paper width, and nothing that reads as a
 unit is split across a sheet. Choose landscape and switch background graphics
 on.
 
-`Ziya-and-Co-Coming-Soon.pdf` in this folder was produced that way, at
-1440 x 900 so each sheet is one screen of the site.
+Print at 1440 x 900 so each sheet comes out as one screen of the site.
 
-**Its headline face is a stand-in.** The machine that produced it cannot
-reach Google Fonts, so Bodoni Moda and Montserrat fell back to Latin Modern
+**Beware the headline face if you export from a machine without the fonts.**
+A machine that cannot reach Google Fonts falls back to Latin Modern
 Roman and Poppins. Printing the page yourself, on a machine that can load the
 fonts, gives the true typography. See **Typefaces** below.
 
@@ -263,8 +252,8 @@ Opening animates from `0fr` to `1fr` on a grid row, so no maximum height has
 to be guessed at and nothing is clipped if the copy grows. In print every
 answer is forced open, since a collapsed accordion prints blank.
 
-The page alternates ground: shell, shell, **sage**, shell, **blush**, shell,
-**sage**.
+The page alternates ground: ivory, ivory, **espresso**, ivory, **blush**,
+ivory, **espresso**.
 
 All copy comes from the brand document, recast out of first person into a
 biography of the business that speaks to the reader. The "good to know"
