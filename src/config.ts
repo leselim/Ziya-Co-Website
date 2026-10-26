@@ -20,7 +20,8 @@ export const CONTACT_CELL = "063 123 3361";
  * and hands it to the mailbox below instead, so nothing is ever collected and
  * quietly dropped.
  */
-const ENDPOINT_HERE = "";
+const ENDPOINT_HERE =
+  "https://script.google.com/macros/s/AKfycbzLDkeFXDqOkJlnr7vQjVJuclG44gr9xeIUGJEzEYYLvP234rYrIw56A-ZiUJWkQN7d/exec";
 
 const fromEnv = import.meta.env.VITE_SIGNUP_ENDPOINT;
 const raw = typeof fromEnv === "string" && fromEnv.trim() ? fromEnv : ENDPOINT_HERE;

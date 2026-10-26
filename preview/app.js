@@ -23,7 +23,8 @@
   var LAUNCH = new Date("2026-12-09T00:00:00+02:00"); // SAST
   /* Paste the Apps Script Web App URL between the quotes, e.g.
      "https://script.google.com/macros/s/AKfycb..../exec" */
-  var ENDPOINT_HERE = "";
+  var ENDPOINT_HERE =
+    "https://script.google.com/macros/s/AKfycbzLDkeFXDqOkJlnr7vQjVJuclG44gr9xeIUGJEzEYYLvP234rYrIw56A-ZiUJWkQN7d/exec";
 
   var CONTACT = "info@ziyaco.co.za";
   var ENDPOINT =
