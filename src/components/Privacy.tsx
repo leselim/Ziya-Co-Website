@@ -54,6 +54,14 @@ function inScope(): PolicySection[] {
    PRIVACY_UPDATED is deliberately not rendered: Ziyanda asked for the "last
    updated" line to come off. It stays in privacy.ts as part of the record. */
 
+/** The document closes with a heart after the last sentence. Ziyanda does
+ *  not want it on the page, so any trailing pictograph is dropped at render.
+ *  The wording itself is untouched and privacy.ts still holds the document
+ *  exactly as written. */
+function plain(s: string) {
+  return s.replace(/[\s\u{FE0F}\u{2600}-\u{27BF}\u{1F000}-\u{1FAFF}]+$/u, "");
+}
+
 /** The document sets its headings in full caps; Ziyanda reads them better
  *  in sentence case, and casing is presentation rather than wording. */
 function sentence(s: string) {
@@ -66,12 +74,12 @@ function Block({ block }: { block: PolicyBlock }) {
     return (
       <ul className="pp__list">
         {(block.items ?? []).map((it) => (
-          <li key={it}>{it}</li>
+          <li key={it}>{plain(it)}</li>
         ))}
       </ul>
     );
   }
-  return <p>{block.text}</p>;
+  return <p>{plain(block.text ?? "")}</p>;
 }
 
 export default function Privacy({

@@ -308,10 +308,15 @@ Ziyanda, in the singular. The policy says "we" and "our" throughout, and it
 stays that way: it is a legal instrument, and its pronouns are not ours to
 restyle for tone. The closing line's heart is the document's too.
 
-Only the casing of the fourteen section headings is changed, from the
-document's full caps to sentence case, which is presentation rather than
-wording. The document's "Last updated: September 2026" line is not rendered,
-at Ziyanda's request; the date stays in `privacy.ts` as part of the record.
+Three presentation choices, none of which touch the wording:
+
+- The fourteen section headings are set in sentence case rather than the
+  document's full caps.
+- The "Last updated: September 2026" line is not rendered. The date stays in
+  `privacy.ts` as part of the record.
+- The heart after the closing sentence is dropped. Any trailing pictograph is
+  stripped at render, so the sentence itself is untouched and the document's
+  own copy in `privacy.ts` still carries it.
 
 ## What the policy shows before launch
 
