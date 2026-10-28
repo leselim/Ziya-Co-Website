@@ -4,7 +4,46 @@ import {
   PRIVACY_INTRO,
   PRIVACY_SECTIONS,
   type PolicyBlock,
+  type PolicySection,
 } from "../privacy";
+import {
+  LAUNCH_ONLY_ITEMS,
+  LAUNCH_ONLY_LINES,
+  LAUNCH_ONLY_SECTIONS,
+  SCOPE_NOTE,
+  SHOP_OPEN,
+} from "../privacyScope";
+
+/* The policy, narrowed to what Ziya & Co is actually doing today. See
+   privacyScope.ts: on 9 December SHOP_OPEN goes true and all of this
+   returns untouched. Sections are numbered as they appear rather than by
+   the document's own numbering, so a reader never sees a gap where a
+   withheld section used to be. */
+function inScope(): PolicySection[] {
+  if (SHOP_OPEN) return PRIVACY_SECTIONS;
+
+  return PRIVACY_SECTIONS.filter(
+    (s) => !LAUNCH_ONLY_SECTIONS.includes(s.n)
+  ).map((s) => ({
+    ...s,
+    blocks: s.blocks
+      .map((b) =>
+        b.kind === "ul"
+          ? {
+              ...b,
+              items: (b.items ?? []).filter(
+                (it) => !LAUNCH_ONLY_ITEMS.includes(it)
+              ),
+            }
+          : b
+      )
+      .filter((b) =>
+        b.kind === "ul"
+          ? (b.items ?? []).length > 0
+          : !LAUNCH_ONLY_LINES.includes(b.text ?? "")
+      ),
+  }));
+}
 
 /* Plain fact rather than legal wording, and the only thing on this panel
    that is not the brand document's own text. The policy is written for the
@@ -14,10 +53,6 @@ import {
 
    PRIVACY_UPDATED is deliberately not rendered: Ziyanda asked for the "last
    updated" line to come off. It stays in privacy.ts as part of the record. */
-const NOTE =
-  "Ziya & Co is not open yet. The only thing this site collects today is the " +
-  "email address you leave for the launch note. The sections below about " +
-  "orders, payments and delivery apply from 9 December, when the shop opens.";
 
 /** The document sets its headings in full caps; Ziyanda reads them better
  *  in sentence case, and casing is presentation rather than wording. */
@@ -48,7 +83,8 @@ export default function Privacy({
 }) {
   const panel = useRef<HTMLDivElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
-  const [here, setHere] = useState(PRIVACY_SECTIONS[0]?.id ?? "");
+  const sections = inScope();
+  const [here, setHere] = useState(sections[0]?.id ?? "");
 
   /* scroll lock, focus in, Escape out, and a Tab that cannot wander off */
   useEffect(() => {
@@ -152,8 +188,10 @@ export default function Privacy({
             <h2 id="pp-title" className="display">
               Privacy policy
             </h2>
-            <p className="pp__note">{NOTE}</p>
-            {PRIVACY_INTRO.map((t) => (
+            {!SHOP_OPEN && <p className="pp__note">{SCOPE_NOTE}</p>}
+            {PRIVACY_INTRO.filter(
+              (t) => SHOP_OPEN || !LAUNCH_ONLY_LINES.includes(t)
+            ).map((t) => (
               <p className="pp__lede" key={t}>
                 {t}
               </p>
@@ -163,14 +201,14 @@ export default function Privacy({
           <div className="pp__body">
             <nav className="pp__toc" aria-label="Privacy policy sections">
               <ol>
-                {PRIVACY_SECTIONS.map((s) => (
+                {sections.map((s, i) => (
                   <li key={s.id}>
                     <a
                       href={`#${s.id}`}
                       onClick={(e) => goTo(e, s.id)}
                       aria-current={here === s.id ? "true" : undefined}
                     >
-                      <span className="pp__toc-n">{s.n}</span>
+                      <span className="pp__toc-n">{i + 1}</span>
                       {sentence(s.title)}
                     </a>
                   </li>
@@ -179,11 +217,11 @@ export default function Privacy({
             </nav>
 
             <div className="pp__doc">
-              {PRIVACY_SECTIONS.map((s) => (
+              {sections.map((s, i) => (
                 <section id={s.id} key={s.id}>
                   <h3>
                     <span className="pp__n" aria-hidden="true">
-                      {s.n}
+                      {i + 1}
                     </span>
                     {sentence(s.title)}
                   </h3>

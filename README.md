@@ -313,18 +313,46 @@ document's full caps to sentence case, which is presentation rather than
 wording. The document's "Last updated: September 2026" line is not rendered,
 at Ziyanda's request; the date stays in `privacy.ts` as part of the record.
 
-**One thing on the panel is not hers.** A short note sits under the heading:
+## What the policy shows before launch
+
+The document is written for the open store. Until 9 December the site takes
+an email address and nothing else: no payment, no delivery, no cookie, no
+outbound link. Showing clauses about all four would describe processing that
+is not happening.
+
+**`src/privacyScope.ts` holds that decision**, separately from the generated
+text, and `preview/app.js` carries the same list for the standalone build.
+Nothing is deleted, only withheld:
+
+| | |
+|---|---|
+| Sections withheld | 4 Payment information, 5 Delivery partners, 7 Cookies, 11 Third-party websites |
+| Paragraphs withheld | the opening "…place an order…" paragraph, and Marketing's closing line about order confirmations |
+| List items withheld | everything in "Information we collect" except the email address and two others; the order, payment and delivery lines in "How we use your information" |
+
+Ten sections remain, **numbered 1 to 10 as they appear**, so a reader never
+sees a gap where a withheld section used to be.
+
+Two rules this file keeps to. It withholds whole units and never edits inside
+her sentences, which is why the opening paragraph goes entirely rather than
+losing three words. And everything still shown is the document verbatim: a
+test confirms all 47 remaining paragraphs and items, and all 10 headings,
+appear in the document exactly as written.
+
+**ON 9 DECEMBER: set `SHOP_OPEN` to true** in `src/privacyScope.ts`, and the
+same in `preview/app.js`. All fourteen sections return, all 85 lines of the
+document are back, and the note below disappears. That is tested too.
+
+A short note sits under the heading while the policy is narrowed:
 
 > Ziya & Co is not open yet. The only thing this site collects today is the
-> email address you leave for the launch note. The sections below about
-> orders, payments and delivery apply from 9 December, when the shop opens.
+> email address you leave for the launch note, and this policy covers only
+> that. The parts about orders, payments and delivery are added when the shop
+> opens on 9 December.
 
-The policy is written for the open store, and until launch the site takes an
-address and nothing else. Leaving a reader to assume the payment and delivery
-clauses are already in play would be misleading, so this says plainly that
-they are not. It is fact rather than legal wording, and it is set apart in
-its own band so it is never mistaken for the policy's own voice. **Take it
-out on 9 December**, when the rest of it becomes true.
+It is fact rather than legal wording, the only thing on the panel that is not
+hers, and it is set in its own band so it is never mistaken for the policy's
+voice. It disappears with the same boolean.
 
 **Still missing, and it needs her words, not mine.** Addresses from the form
 are stored in a Google spreadsheet, which makes Google a third party handling

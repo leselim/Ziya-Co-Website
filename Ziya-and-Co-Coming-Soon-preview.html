@@ -2738,6 +2738,65 @@ h3.display {
      ------------------------------------------------------------------ */
   var PRIVACY_DATA = {"updated":"September 2026","intro":["At ZIYA & CO, your privacy matters to us.","This Privacy Policy explains how ZIYA & CO collects, uses, stores and protects your personal information when you visit our website, place an order, contact us or otherwise interact with us.","ZIYA & CO respects your right to privacy and is committed to handling your personal information responsibly and in accordance with applicable South African privacy laws, including the Protection of Personal Information Act 4 of 2013 (POPIA)."],"sections":[{"n":"1","title":"WHO WE ARE","blocks":[{"kind":"p","text":"ZIYA & CO is an online jewellery business operating in South Africa."},{"kind":"p","text":"For any privacy-related questions, you can contact us at:"},{"kind":"ul","items":["Email: info@ziyaco.co.za"]}],"id":"pp-who-we-are"},{"n":"2","title":"INFORMATION WE COLLECT","blocks":[{"kind":"p","text":"When you interact with ZIYA & CO, we may collect information such as:"},{"kind":"ul","items":["Your name and surname","Email address","Telephone or mobile number","Billing and delivery address","Order and purchase information","Payment-related information necessary to process your transaction","Communications you have with us","Information you provide when contacting us regarding an order, return or exchange","Technical information relating to your use of our website, such as IP address, browser type and device information, where applicable"]},{"kind":"p","text":"We only request information that is reasonably necessary for the purposes described in this Privacy Policy."}],"id":"pp-information-we-collect"},{"n":"3","title":"HOW WE USE YOUR INFORMATION","blocks":[{"kind":"p","text":"We may use your personal information to:"},{"kind":"ul","items":["Process and fulfil your orders","Process payments","Arrange delivery or collection","Communicate with you regarding your order","Provide customer support","Process returns, refunds and exchanges","Respond to enquiries","Improve our website, products and customer experience","Detect and prevent fraud, abuse or other unlawful activity","Meet our legal, accounting and regulatory obligations","Send marketing communications where permitted by law and where you have provided the required consent"]}],"id":"pp-how-we-use-your-information"},{"n":"4","title":"PAYMENT INFORMATION","blocks":[{"kind":"p","text":"Payments made through our website may be processed by a third-party payment service provider."},{"kind":"p","text":"ZIYA & CO does not intentionally store your full payment card details."},{"kind":"p","text":"Payment information is handled by the relevant payment provider in accordance with its own security and privacy practices."}],"id":"pp-payment-information"},{"n":"5","title":"DELIVERY PARTNERS AND SERVICE PROVIDERS","blocks":[{"kind":"p","text":"To fulfil your order, we may need to share certain information with trusted third-party service providers."},{"kind":"p","text":"For example, your name, contact details and delivery address may be provided to a courier responsible for delivering your order."},{"kind":"p","text":"We only share information that is reasonably necessary for the relevant service to be performed."}],"id":"pp-delivery-partners-and-service-providers"},{"n":"6","title":"MARKETING","blocks":[{"kind":"p","text":"If you choose to subscribe to our marketing communications, we may use your contact details to send you information about:"},{"kind":"ul","items":["New collections","Product launches","Special offers","Promotions","ZIYA & CO news and updates"]},{"kind":"p","text":"You may unsubscribe from marketing communications at any time by using the unsubscribe option provided in the communication or by contacting us."},{"kind":"p","text":"Transactional communications, such as order confirmations and delivery updates, are not marketing communications and may still be sent when necessary to fulfil your order."}],"id":"pp-marketing"},{"n":"7","title":"COOKIES","blocks":[{"kind":"p","text":"Our website may use cookies and similar technologies to help the website function properly, remember preferences, understand website usage and improve your experience."},{"kind":"p","text":"Some cookies may also be placed by third-party services used on our website, such as payment, analytics or marketing providers."},{"kind":"p","text":"You can manage or disable cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of the website."}],"id":"pp-cookies"},{"n":"8","title":"HOW WE PROTECT YOUR INFORMATION","blocks":[{"kind":"p","text":"We take reasonable and appropriate measures to protect personal information against loss, misuse, unauthorised access, disclosure, alteration or destruction."},{"kind":"p","text":"However, no online transmission or electronic storage system can be guaranteed to be completely secure."},{"kind":"p","text":"If we become aware of a security compromise involving your personal information, we will take appropriate steps in accordance with applicable law."}],"id":"pp-how-we-protect-your-information"},{"n":"9","title":"HOW LONG WE KEEP YOUR INFORMATION","blocks":[{"kind":"p","text":"We retain personal information only for as long as reasonably necessary for the purposes for which it was collected, or where retention is required or permitted by law."},{"kind":"p","text":"Certain information relating to transactions may need to be retained for accounting, tax, legal or regulatory purposes."}],"id":"pp-how-long-we-keep-your-information"},{"n":"10","title":"YOUR PRIVACY RIGHTS","blocks":[{"kind":"p","text":"Subject to applicable law, you may have the right to:"},{"kind":"ul","items":["Request access to personal information we hold about you","Request correction or updating of inaccurate information","Request deletion of information where there is no lawful reason for us to continue retaining it","Object to certain forms of processing","Withdraw consent where processing is based on consent","Ask questions about how your personal information is being used"]},{"kind":"p","text":"Requests can be submitted to:"},{"kind":"ul","items":["info@ziyaco.co.za"]},{"kind":"p","text":"We may need to verify your identity before processing certain requests."}],"id":"pp-your-privacy-rights"},{"n":"11","title":"THIRD-PARTY WEBSITES","blocks":[{"kind":"p","text":"Our website may contain links to third-party websites or services."},{"kind":"p","text":"ZIYA & CO is not responsible for the privacy practices, security or content of third-party websites. We recommend reviewing the privacy policies of those websites before providing them with personal information."}],"id":"pp-third-party-websites"},{"n":"12","title":"CHILDREN'S INFORMATION","blocks":[{"kind":"p","text":"Our website is not intended to knowingly collect personal information from children without the appropriate consent required by law."},{"kind":"p","text":"If you believe that a child has provided personal information to us without the required consent, please contact us so that we can investigate and take appropriate action."}],"id":"pp-children-s-information"},{"n":"13","title":"CHANGES TO THIS PRIVACY POLICY","blocks":[{"kind":"p","text":"We may update this Privacy Policy from time to time to reflect changes to our business, website, technology or legal requirements."},{"kind":"p","text":"The latest version will always be made available on our website."}],"id":"pp-changes-to-this-privacy-policy"},{"n":"14","title":"CONTACT US","blocks":[{"kind":"p","text":"If you have any questions, concerns or requests regarding your personal information or this Privacy Policy, please contact us:"},{"kind":"ul","items":["ZIYA & CO","Email: info@ziyaco.co.za"]},{"kind":"p","text":"We value your trust and are committed to protecting your information while providing you with a beautiful ZIYA & CO experience. 🤍"}],"id":"pp-contact-us"}]};
 
+
+  /* What of the policy applies before the shop opens. PRIVACY_DATA is the
+     whole document and is never edited; this is the editorial decision on
+     top of it. Nothing is deleted, only withheld.
+
+     ON 9 DECEMBER: set SHOP_OPEN to true. Everything returns, the note at
+     the top goes, and the policy reads whole again. Keep this in step with
+     src/privacyScope.ts. */
+  var SHOP_OPEN = false;
+  var LAUNCH_ONLY_SECTIONS = ["4", "5", "7", "11"];
+  var LAUNCH_ONLY_LINES = [
+    "Transactional communications, such as order confirmations and delivery updates, are not marketing communications and may still be sent when necessary to fulfil your order.",
+    "This Privacy Policy explains how ZIYA & CO collects, uses, stores and protects your personal information when you visit our website, place an order, contact us or otherwise interact with us."
+  ];
+  var LAUNCH_ONLY_ITEMS = [
+    "Your name and surname",
+    "Telephone or mobile number",
+    "Billing and delivery address",
+    "Order and purchase information",
+    "Payment-related information necessary to process your transaction",
+    "Information you provide when contacting us regarding an order, return or exchange",
+    "Process and fulfil your orders",
+    "Process payments",
+    "Arrange delivery or collection",
+    "Communicate with you regarding your order",
+    "Process returns, refunds and exchanges"
+  ];
+  var SCOPE_NOTE =
+    "Ziya & Co is not open yet. The only thing this site collects today is " +
+    "the email address you leave for the launch note, and this policy covers " +
+    "only that. The parts about orders, payments and delivery are added when " +
+    "the shop opens on 9 December.";
+
+  function sectionsInScope() {
+    if (SHOP_OPEN) return PRIVACY_DATA.sections;
+    return PRIVACY_DATA.sections
+      .filter(function (s) {
+        return LAUNCH_ONLY_SECTIONS.indexOf(s.n) === -1;
+      })
+      .map(function (s) {
+        var blocks = s.blocks
+          .map(function (b) {
+            if (b.kind !== "ul") return b;
+            return {
+              kind: "ul",
+              items: b.items.filter(function (it) {
+                return LAUNCH_ONLY_ITEMS.indexOf(it) === -1;
+              })
+            };
+          })
+          .filter(function (b) {
+            return b.kind === "ul"
+              ? b.items.length > 0
+              : LAUNCH_ONLY_LINES.indexOf(b.text) === -1;
+          });
+        return { n: s.n, title: s.title, blocks: blocks };
+      });
+  }
+
   function sentenceCase(s) {
     var lower = s.toLocaleLowerCase();
     return lower.charAt(0).toLocaleUpperCase() + lower.slice(1);
@@ -2787,15 +2846,13 @@ h3.display {
     /* plain fact rather than legal wording, and the only thing on this
        panel that is not the brand document's own text */
     var note = el("p", "pp__note");
-    note.textContent =
-      "Ziya & Co is not open yet. The only thing this site collects today " +
-      "is the email address you leave for the launch note. The sections " +
-      "below about orders, payments and delivery apply from 9 December, " +
-      "when the shop opens.";
+    note.textContent = SCOPE_NOTE;
     head.appendChild(label);
     head.appendChild(h2);
-    head.appendChild(note);
-    PRIVACY_DATA.intro.forEach(function (t) {
+    if (!SHOP_OPEN) head.appendChild(note);
+    PRIVACY_DATA.intro.filter(function (t) {
+      return SHOP_OPEN || LAUNCH_ONLY_LINES.indexOf(t) === -1;
+    }).forEach(function (t) {
       var p = el("p", "pp__lede");
       p.textContent = t;
       head.appendChild(p);
@@ -2808,13 +2865,14 @@ h3.display {
     nav.setAttribute("aria-label", "Privacy policy sections");
     var ol = document.createElement("ol");
     var links = {};
-    PRIVACY_DATA.sections.forEach(function (s) {
+    var SECTIONS = sectionsInScope();
+    SECTIONS.forEach(function (s, i) {
       var id = slugOf(s.title);
       var li = document.createElement("li");
       var a = document.createElement("a");
       a.href = "#" + id;
       var num = el("span", "pp__toc-n");
-      num.textContent = s.n;
+      num.textContent = String(i + 1);
       a.appendChild(num);
       a.appendChild(document.createTextNode(sentenceCase(s.title)));
       a.addEventListener("click", function (e) {
@@ -2842,13 +2900,13 @@ h3.display {
     }
 
     var doc = el("div", "pp__doc");
-    PRIVACY_DATA.sections.forEach(function (s) {
+    SECTIONS.forEach(function (s, i) {
       var sec = document.createElement("section");
       sec.id = slugOf(s.title);
       var h3 = document.createElement("h3");
       var n = el("span", "pp__n");
       n.setAttribute("aria-hidden", "true");
-      n.textContent = s.n;
+      n.textContent = String(i + 1);
       h3.appendChild(n);
       h3.appendChild(document.createTextNode(sentenceCase(s.title)));
       sec.appendChild(h3);
@@ -2875,7 +2933,7 @@ h3.display {
     scroll.appendChild(inner);
     pp.appendChild(scroll);
 
-    mark_current(slugOf(PRIVACY_DATA.sections[0].title));
+    mark_current(slugOf(SECTIONS[0].title));
 
     /* which section the reader is in, for the contents list beside it */
     if (typeof IntersectionObserver !== "undefined") {
