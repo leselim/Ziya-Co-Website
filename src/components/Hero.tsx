@@ -1,6 +1,6 @@
 import Typed from "./Typed";
 
-const HEADLINE = [{ t: "Jewellery for every day, and every version of you" }];
+const HEADLINE = [{ t: "Jewellery for every version of you" }];
 
 export default function Hero() {
   return (

@@ -1,9 +1,9 @@
 import Reveal from "./Reveal";
 
-/* Copy is the brand document's "About ZIYA & CO". The voice is Ziyanda
-   speaking, first person singular throughout: the document's "we believe"
-   and "every piece is chosen" are hers, so they are "I believe" and "I
-   choose" here. The em dashes are resolved into sentences. */
+/* The brand document's "About ZIYA & CO", word for word, em dashes included.
+   The only edit is the pronouns: the document's plural first person ("We
+   believe", "Our hope") is singular here, because the voice is Ziyanda
+   speaking rather than a company. Everything else is as written. */
 export default function Story() {
   return (
     <section className="section" id="story">
@@ -16,13 +16,14 @@ export default function Story() {
             </h2>
           </div>
           <p className="prose">
-            ZIYA &amp; CO was created from a place of love. A deep, undeniable
-            love for jewellery and the way it makes you feel. For me, jewellery
-            has always been more than just an accessory. There&rsquo;s something
-            about putting on that perfect pair of earrings, slipping on a
-            delicate bracelet or adding a necklace that somehow makes you feel a
-            little more beautiful, a little more confident, and completely
-            yourself. And I wanted to share that feeling.
+            ZIYA &amp; CO was created from a place of love &mdash; a deep,
+            undeniable love for jewellery and the way it makes you feel. For
+            me, jewellery has always been more than just an accessory.
+            There&rsquo;s something about putting on that perfect pair of
+            earrings, slipping on a delicate bracelet or adding a necklace that
+            somehow makes you feel a little more beautiful, a little more
+            confident, and completely yourself. And I wanted to share that
+            feeling.
           </p>
         </Reveal>
 
@@ -32,20 +33,20 @@ export default function Story() {
               I believe jewellery is meant to be lived in. To be worn on
               ordinary days, on big days, on days when you&rsquo;re dressed up
               and days when you&rsquo;re simply running errands. Because you
-              deserve to feel beautiful every day, not just when
+              deserve to feel beautiful every day &mdash; not just when
               there&rsquo;s somewhere special to go.
             </p>
           </Reveal>
           <Reveal delay={110}>
             <p>
-              I choose every piece with the intention of adding a little
-              something to your day. A little sparkle, a little confidence, a
-              little joy.
+              Every piece is chosen with the intention of adding a little
+              something to your day &mdash; a little sparkle, a little
+              confidence, a little joy.
             </p>
           </Reveal>
         </div>
 
-        <Reveal>
+        <Reveal className="story__closer">
           <p className="story__close">
             Because sometimes, the smallest details can make you feel the most
             special

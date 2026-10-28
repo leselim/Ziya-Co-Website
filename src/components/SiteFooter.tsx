@@ -8,7 +8,7 @@ export default function SiteFooter() {
         <div className="site-footer__top">
           <Wordmark />
           <p className="site-footer__tagline">
-            Jewellery for every day, and every version of you
+            Jewellery for every version of you
           </p>
           <p className="site-footer__contact">
             <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
@@ -16,7 +16,12 @@ export default function SiteFooter() {
           </p>
         </div>
         <div className="site-footer__base">
-          <span>Est. 2026 &middot; South Africa</span>
+          <span>South Africa</span>
+          {/* an ordinary anchor: the policy opens off the hash, so this can
+              be copied, shared and opened in a new tab like any link */}
+          <a className="site-footer__legal" href="#privacy">
+            Privacy policy
+          </a>
           <span>Launching {LAUNCH_LABEL}</span>
         </div>
       </div>

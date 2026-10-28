@@ -121,6 +121,7 @@ src/
   main.tsx                 entry point
   App.tsx                  page composition
   config.ts                launch date, contact address, signup endpoint
+  privacy.ts               the policy text, generated from the brand document
   components/
     SiteHeader.tsx         sticky header, anchor nav, mobile sheet
     Hero.tsx               headline, rule, actions
@@ -128,6 +129,8 @@ src/
     Faq.tsx                good to know, as an accordion
     Countdown.tsx          live countdown to launch
     Notify.tsx             email capture
+    Privacy.tsx            the privacy policy, as a full-screen panel
+    SignupDone.tsx         the full-screen note, after an address is stored
     SiteFooter.tsx         wordmark, tagline, contact
     Wordmark.tsx           ZIYA & CO, ampersand upright in the display face
     Reveal.tsx             fade-up on first sight
@@ -265,35 +268,86 @@ meant to be lived in", "Our hope is", "we recommend"). Every one of those is
 singular here: "I believe", "My hope is", "I recommend". The nav and section
 label read "My story" for the same reason.
 
-One exception, and it is deliberate. In the FAQ answers the brand's own "our
-jewellery" became **"every piece"** rather than "my jewellery", because the
-questions already use "my" for the reader's own ("Can I wear my jewellery every
-day?") and two meanings of "my" in one exchange is confusing. "I" is kept
-wherever she is addressing the reader directly: "I recommend", "I aim to
-offer".
+**The em dashes stay.** An earlier pass resolved them into sentences; that
+was reversed on 28 October at Ziyanda's request. "every day — not just when
+there's somewhere special to go" is how the document reads and how the page
+reads. Do not tidy them away again.
 
-Beyond the voice, the document text is word for word. Em dashes are resolved
-into sentences ("every day — not just when" becomes "every day, not just
-when") and one double space was closed up. The hedging is left exactly as
-written ("made to be resistant to tarnishing", never "will not tarnish"), and
-the "good to know" accordion carries the FAQ and care notes in full.
+Beyond the singular pronouns, the document text is word for word, dashes
+included. The hedging is exactly as written ("made to be resistant to
+tarnishing", never "will not tarnish"), and the "good to know" accordion
+carries the FAQ and care notes in full.
 
-The document also contains full shipping, returns, privacy and terms copy.
-None of it is on this page: those are store pages for when the shop opens,
-and a coming-soon page is the wrong place for a returns policy. The privacy
-note beside the signup form is the one exception, and it summarises the real
-policy rather than inventing terms.
+Inside the FAQ the brand is set as **"Ziya & Co"** rather than in full caps,
+which is how Ziyanda wants it read in the questions. Elsewhere on the page it
+stays "ZIYA & CO", as the document has it.
+
+The tagline is **"Jewellery for every version of you"**. The document's longer
+"jewellery for every day, and every version of you" was cut back to it, and
+the footer no longer carries an "Est. 2026".
+
+The document also contains full shipping, returns and terms copy. None of it
+is on this page: those are store pages for when the shop opens, and a
+coming-soon page is the wrong place for a returns policy.
+
+## The privacy policy
+
+The policy **is** on the page, because the signup form collects an address and
+POPIA expects the notice to be reachable at the point of collection. It opens
+as a full-screen reading panel rather than a second page: this build has no
+router, and a policy is something you glance at and leave.
+
+**`src/privacy.ts` is generated, not written.** It was produced from
+`For_website_ZC.docx` so the wording cannot drift, and a test confirms every
+one of the document's 85 lines appears on the rendered page with nothing
+added. If the policy changes, change the document and regenerate; do not
+retype it here.
+
+**It keeps the document's plural voice.** The rest of the site speaks as
+Ziyanda, in the singular. The policy says "we" and "our" throughout, and it
+stays that way: it is a legal instrument, and its pronouns are not ours to
+restyle for tone. The closing line's heart is the document's too.
+
+Only the casing of the fourteen section headings is changed, from the
+document's full caps to sentence case, which is presentation rather than
+wording.
+
+**Links to it are ordinary anchors.** The panel opens off the `#privacy`
+hash, not a click handler, so a link to it can be copied, shared and opened
+in a new tab, and the address bar says where you are. Two places link to it:
+the footer, and the note under the signup form. Closing it clears the hash
+with `replaceState`, so Back does not walk you through every reopening.
+
+A contents list tracks the reader down the page. Focus moves into the panel,
+Tab cycles inside it, Escape closes it, and the page behind cannot scroll.
 
 ## Motion
 
-Two lines type themselves: the hero headline on load (about 4.6 seconds) and
-the philosophy statement when it is scrolled to (about 3 seconds). The pace
-varies per character and rests longer at punctuation.
+Three places type themselves. The hero headline on load (about 3.5 seconds),
+the philosophy statement when it is scrolled to (about 3 seconds), and the
+full-screen note after a successful signup (about 8 seconds across three
+lines). The pace varies per character and rests longer at punctuation.
 
-Everything else is quiet: sections fade up as they arrive, the countdown
-units settle one after another, the wordmark opens its tracking on load, the
-rule under the headline draws itself once the line lands, and hover
-transitions run at 0.45s.
+Section heads arrive in three beats rather than one: label, then heading,
+then the paragraph beside it. The two story columns come from slightly
+different distances, the closing line settles last and from further away, the
+countdown units land one after another, both wordmarks open their tracking,
+the rule under the headline draws itself once the line lands, an accordion
+row warms and shifts a hair under the cursor, and hover transitions run at
+0.45s.
+
+**The signup note is a real dialog.** Focus moves into it, Escape closes it,
+Tab cannot wander out, the page behind cannot scroll, and focus returns to
+the email field on close. The Close button is visible from the first frame,
+never gated behind the typing: a full-screen takeover with no obvious way out
+is a trap. It opens only when an address is actually stored — the mailto
+fallback and every failure path deliberately do not reach it.
+
+**A warning about the staggered heads.** The rules that hide them carry an
+`html[data-js="true"]` prefix, so the rules that reveal them need the same
+prefix or they lose on specificity and the heads stay invisible for good.
+That bug shipped into a screenshot once. `scripts`-free check: scroll the
+whole page and confirm no laid-out text node ends below 0.9 opacity.
 
 **None of it can hide content.** The entrance rules only apply once the
 script has set `data-js` on the document, and a line only hands over to its

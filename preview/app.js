@@ -338,12 +338,148 @@
     var trap = document.getElementById("company");
     var busy = false;
 
+
+  /* ------------------------------------------------------------------
+     The note she types back, once an address is safely stored.
+
+     A full-screen dialog, built here rather than sitting in the markup:
+     it only ever exists after a successful signup, so there is nothing to
+     hide and nothing that can be left stranded if this script fails. The
+     Close button is present from the first frame, because a takeover with
+     no obvious way out is a trap. Reduced motion is given the whole
+     message at once.
+     ------------------------------------------------------------------ */
+  var DONE_LINES = [
+    "Thank you.",
+    "Ziya & Co has your email.",
+    "I’ll write to you on 9 December — the day the doors open."
+  ];
+
+  function openDone(returnTo) {
+    var reduced =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var wrap = document.createElement("div");
+    wrap.className = "done";
+    wrap.setAttribute("role", "dialog");
+    wrap.setAttribute("aria-modal", "true");
+    wrap.setAttribute("aria-labelledby", "done-said");
+    wrap.tabIndex = -1;
+
+    /* the whole message, read at once rather than letter by letter */
+    var said = document.createElement("p");
+    said.id = "done-said";
+    said.className = "sr-only";
+    said.textContent = DONE_LINES.join(" ");
+    wrap.appendChild(said);
+
+    var inner = document.createElement("div");
+    inner.className = "done__inner";
+
+    var mark = document.createElement("span");
+    mark.className = "wordmark done__mark";
+    mark.innerHTML = 'ZIYA <span class="amp">&amp;</span> CO';
+    inner.appendChild(mark);
+
+    var rule = document.createElement("div");
+    rule.className = "done__rule";
+    rule.setAttribute("aria-hidden", "true");
+    inner.appendChild(rule);
+
+    var lines = document.createElement("div");
+    lines.className = "done__lines";
+    var outs = [];
+    DONE_LINES.forEach(function (text) {
+      var p = document.createElement("p");
+      p.className = "done__line";
+      p.setAttribute("aria-hidden", "true");
+      var ghost = document.createElement("span");
+      ghost.className = "done__ghost";
+      ghost.textContent = text;
+      var out = document.createElement("span");
+      out.className = "done__out";
+      p.appendChild(ghost);
+      p.appendChild(out);
+      if (!reduced) p.setAttribute("data-typing", "true");
+      lines.appendChild(p);
+      outs.push({ host: p, out: out, text: text });
+    });
+    inner.appendChild(lines);
+
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "btn btn--line done__close";
+    close.textContent = "Close";
+    inner.appendChild(close);
+
+    wrap.appendChild(inner);
+    document.body.appendChild(wrap);
+
+    var prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    wrap.focus();
+
+    function shut() {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+      if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
+      /* back where they were, not at the top of the document */
+      if (returnTo && typeof returnTo.focus === "function") returnTo.focus();
+    }
+
+    function onKey(e) {
+      if (e.key === "Escape" || e.keyCode === 27) {
+        e.preventDefault();
+        shut();
+        return;
+      }
+      /* only one thing in here is focusable, so the trap is simply this */
+      if (e.key === "Tab" || e.keyCode === 9) {
+        e.preventDefault();
+        close.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    close.addEventListener("click", shut);
+
+    if (reduced) return;
+
+    /* one line at a time, each starting as the one before it lands */
+    var li = 0;
+    function typeOne() {
+      if (li >= outs.length) {
+        close.setAttribute("data-ready", "true");
+        return;
+      }
+      var item = outs[li];
+      var i = 0;
+      item.host.setAttribute("data-caret", "true");
+      (function step() {
+        item.out.textContent = item.text.slice(0, i);
+        if (i >= item.text.length) {
+          item.host.removeAttribute("data-caret");
+          li += 1;
+          window.setTimeout(typeOne, 260);
+          return;
+        }
+        var just = item.text.charAt(i - 1);
+        var rest = /[,.?]/.test(just) ? 420 : /\s/.test(just) ? 110 : 0;
+        i += 1;
+        window.setTimeout(step, 62 + rest + Math.random() * 30);
+      })();
+    }
+    typeOne();
+  }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (busy) return; // no double submissions while one is in flight
 
       if (trap && trap.value) {
         setStatus("Thank you. I’ll write to you on 9 December.");
+        openDone(input);
         form.reset();
         return;
       }
@@ -401,6 +537,9 @@
           }
           form.reset();
           setStatus("Thank you. I’ll write to you on 9 December.");
+          /* only once the address is actually stored: the mailto fallback
+             and every failure path deliberately do not reach this */
+          openDone(input);
         })
         .catch(function () {
           setStatus(
@@ -417,4 +556,237 @@
         });
     });
   });
+
+  /* ------------------------------------------------------------------
+     The privacy policy, as a full-screen reading panel.
+
+     Same bargain as the React build: the panel is opened by the #privacy
+     hash, so every link to it is an ordinary anchor that can be copied and
+     shared, and the address bar says where you are. The policy text below
+     is generated from the brand document rather than retyped, and keeps the
+     document's own plural voice: the rest of the site speaks as Ziyanda,
+     but this is a legal instrument and its pronouns are not ours to
+     restyle.
+     ------------------------------------------------------------------ */
+  var PRIVACY_DATA = {"updated":"September 2026","intro":["At ZIYA & CO, your privacy matters to us.","This Privacy Policy explains how ZIYA & CO collects, uses, stores and protects your personal information when you visit our website, place an order, contact us or otherwise interact with us.","ZIYA & CO respects your right to privacy and is committed to handling your personal information responsibly and in accordance with applicable South African privacy laws, including the Protection of Personal Information Act 4 of 2013 (POPIA)."],"sections":[{"n":"1","title":"WHO WE ARE","blocks":[{"kind":"p","text":"ZIYA & CO is an online jewellery business operating in South Africa."},{"kind":"p","text":"For any privacy-related questions, you can contact us at:"},{"kind":"ul","items":["Email: info@ziyaco.co.za"]}],"id":"pp-who-we-are"},{"n":"2","title":"INFORMATION WE COLLECT","blocks":[{"kind":"p","text":"When you interact with ZIYA & CO, we may collect information such as:"},{"kind":"ul","items":["Your name and surname","Email address","Telephone or mobile number","Billing and delivery address","Order and purchase information","Payment-related information necessary to process your transaction","Communications you have with us","Information you provide when contacting us regarding an order, return or exchange","Technical information relating to your use of our website, such as IP address, browser type and device information, where applicable"]},{"kind":"p","text":"We only request information that is reasonably necessary for the purposes described in this Privacy Policy."}],"id":"pp-information-we-collect"},{"n":"3","title":"HOW WE USE YOUR INFORMATION","blocks":[{"kind":"p","text":"We may use your personal information to:"},{"kind":"ul","items":["Process and fulfil your orders","Process payments","Arrange delivery or collection","Communicate with you regarding your order","Provide customer support","Process returns, refunds and exchanges","Respond to enquiries","Improve our website, products and customer experience","Detect and prevent fraud, abuse or other unlawful activity","Meet our legal, accounting and regulatory obligations","Send marketing communications where permitted by law and where you have provided the required consent"]}],"id":"pp-how-we-use-your-information"},{"n":"4","title":"PAYMENT INFORMATION","blocks":[{"kind":"p","text":"Payments made through our website may be processed by a third-party payment service provider."},{"kind":"p","text":"ZIYA & CO does not intentionally store your full payment card details."},{"kind":"p","text":"Payment information is handled by the relevant payment provider in accordance with its own security and privacy practices."}],"id":"pp-payment-information"},{"n":"5","title":"DELIVERY PARTNERS AND SERVICE PROVIDERS","blocks":[{"kind":"p","text":"To fulfil your order, we may need to share certain information with trusted third-party service providers."},{"kind":"p","text":"For example, your name, contact details and delivery address may be provided to a courier responsible for delivering your order."},{"kind":"p","text":"We only share information that is reasonably necessary for the relevant service to be performed."}],"id":"pp-delivery-partners-and-service-providers"},{"n":"6","title":"MARKETING","blocks":[{"kind":"p","text":"If you choose to subscribe to our marketing communications, we may use your contact details to send you information about:"},{"kind":"ul","items":["New collections","Product launches","Special offers","Promotions","ZIYA & CO news and updates"]},{"kind":"p","text":"You may unsubscribe from marketing communications at any time by using the unsubscribe option provided in the communication or by contacting us."},{"kind":"p","text":"Transactional communications, such as order confirmations and delivery updates, are not marketing communications and may still be sent when necessary to fulfil your order."}],"id":"pp-marketing"},{"n":"7","title":"COOKIES","blocks":[{"kind":"p","text":"Our website may use cookies and similar technologies to help the website function properly, remember preferences, understand website usage and improve your experience."},{"kind":"p","text":"Some cookies may also be placed by third-party services used on our website, such as payment, analytics or marketing providers."},{"kind":"p","text":"You can manage or disable cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of the website."}],"id":"pp-cookies"},{"n":"8","title":"HOW WE PROTECT YOUR INFORMATION","blocks":[{"kind":"p","text":"We take reasonable and appropriate measures to protect personal information against loss, misuse, unauthorised access, disclosure, alteration or destruction."},{"kind":"p","text":"However, no online transmission or electronic storage system can be guaranteed to be completely secure."},{"kind":"p","text":"If we become aware of a security compromise involving your personal information, we will take appropriate steps in accordance with applicable law."}],"id":"pp-how-we-protect-your-information"},{"n":"9","title":"HOW LONG WE KEEP YOUR INFORMATION","blocks":[{"kind":"p","text":"We retain personal information only for as long as reasonably necessary for the purposes for which it was collected, or where retention is required or permitted by law."},{"kind":"p","text":"Certain information relating to transactions may need to be retained for accounting, tax, legal or regulatory purposes."}],"id":"pp-how-long-we-keep-your-information"},{"n":"10","title":"YOUR PRIVACY RIGHTS","blocks":[{"kind":"p","text":"Subject to applicable law, you may have the right to:"},{"kind":"ul","items":["Request access to personal information we hold about you","Request correction or updating of inaccurate information","Request deletion of information where there is no lawful reason for us to continue retaining it","Object to certain forms of processing","Withdraw consent where processing is based on consent","Ask questions about how your personal information is being used"]},{"kind":"p","text":"Requests can be submitted to:"},{"kind":"ul","items":["info@ziyaco.co.za"]},{"kind":"p","text":"We may need to verify your identity before processing certain requests."}],"id":"pp-your-privacy-rights"},{"n":"11","title":"THIRD-PARTY WEBSITES","blocks":[{"kind":"p","text":"Our website may contain links to third-party websites or services."},{"kind":"p","text":"ZIYA & CO is not responsible for the privacy practices, security or content of third-party websites. We recommend reviewing the privacy policies of those websites before providing them with personal information."}],"id":"pp-third-party-websites"},{"n":"12","title":"CHILDREN'S INFORMATION","blocks":[{"kind":"p","text":"Our website is not intended to knowingly collect personal information from children without the appropriate consent required by law."},{"kind":"p","text":"If you believe that a child has provided personal information to us without the required consent, please contact us so that we can investigate and take appropriate action."}],"id":"pp-children-s-information"},{"n":"13","title":"CHANGES TO THIS PRIVACY POLICY","blocks":[{"kind":"p","text":"We may update this Privacy Policy from time to time to reflect changes to our business, website, technology or legal requirements."},{"kind":"p","text":"The latest version will always be made available on our website."}],"id":"pp-changes-to-this-privacy-policy"},{"n":"14","title":"CONTACT US","blocks":[{"kind":"p","text":"If you have any questions, concerns or requests regarding your personal information or this Privacy Policy, please contact us:"},{"kind":"ul","items":["ZIYA & CO","Email: info@ziyaco.co.za"]},{"kind":"p","text":"We value your trust and are committed to protecting your information while providing you with a beautiful ZIYA & CO experience. 🤍"}],"id":"pp-contact-us"}]};
+
+  function sentenceCase(s) {
+    var lower = s.toLocaleLowerCase();
+    return lower.charAt(0).toLocaleUpperCase() + lower.slice(1);
+  }
+
+  function slugOf(title) {
+    return "pp-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  function buildPrivacy() {
+    var reduced =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var el = function (tag, cls) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      return n;
+    };
+
+    var pp = el("div", "pp");
+    pp.setAttribute("role", "dialog");
+    pp.setAttribute("aria-modal", "true");
+    pp.setAttribute("aria-labelledby", "pp-title");
+    pp.tabIndex = -1;
+
+    var bar = el("header", "pp__bar");
+    var mark = el("span", "wordmark pp__mark");
+    mark.innerHTML = 'ZIYA <span class="amp">&amp;</span> CO';
+    var close = el("button", "btn btn--line pp__close");
+    close.type = "button";
+    close.textContent = "Close";
+    bar.appendChild(mark);
+    bar.appendChild(close);
+    pp.appendChild(bar);
+
+    var scroll = el("div", "pp__scroll");
+    var inner = el("div", "pp__inner");
+
+    var head = el("div", "pp__head");
+    var label = el("p", "label");
+    label.textContent = "Privacy";
+    var h2 = el("h2", "display");
+    h2.id = "pp-title";
+    h2.textContent = "Privacy policy";
+    var meta = el("p", "pp__meta");
+    meta.textContent = "Last updated " + PRIVACY_DATA.updated;
+    head.appendChild(label);
+    head.appendChild(h2);
+    head.appendChild(meta);
+    PRIVACY_DATA.intro.forEach(function (t) {
+      var p = el("p", "pp__lede");
+      p.textContent = t;
+      head.appendChild(p);
+    });
+    inner.appendChild(head);
+
+    var body = el("div", "pp__body");
+
+    var nav = el("nav", "pp__toc");
+    nav.setAttribute("aria-label", "Privacy policy sections");
+    var ol = document.createElement("ol");
+    var links = {};
+    PRIVACY_DATA.sections.forEach(function (s) {
+      var id = slugOf(s.title);
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = "#" + id;
+      var num = el("span", "pp__toc-n");
+      num.textContent = s.n;
+      a.appendChild(num);
+      a.appendChild(document.createTextNode(sentenceCase(s.title)));
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var target = scroll.querySelector("#" + id);
+        if (!target) return;
+        target.scrollIntoView({
+          behavior: reduced ? "auto" : "smooth",
+          block: "start"
+        });
+        mark_current(id);
+      });
+      links[id] = a;
+      li.appendChild(a);
+      ol.appendChild(li);
+    });
+    nav.appendChild(ol);
+    body.appendChild(nav);
+
+    function mark_current(id) {
+      Object.keys(links).forEach(function (k) {
+        if (k === id) links[k].setAttribute("aria-current", "true");
+        else links[k].removeAttribute("aria-current");
+      });
+    }
+
+    var doc = el("div", "pp__doc");
+    PRIVACY_DATA.sections.forEach(function (s) {
+      var sec = document.createElement("section");
+      sec.id = slugOf(s.title);
+      var h3 = document.createElement("h3");
+      var n = el("span", "pp__n");
+      n.setAttribute("aria-hidden", "true");
+      n.textContent = s.n;
+      h3.appendChild(n);
+      h3.appendChild(document.createTextNode(sentenceCase(s.title)));
+      sec.appendChild(h3);
+      s.blocks.forEach(function (b) {
+        if (b.kind === "ul") {
+          var ul = el("ul", "pp__list");
+          b.items.forEach(function (it) {
+            var li = document.createElement("li");
+            li.textContent = it;
+            ul.appendChild(li);
+          });
+          sec.appendChild(ul);
+        } else {
+          var p = document.createElement("p");
+          p.textContent = b.text;
+          sec.appendChild(p);
+        }
+      });
+      doc.appendChild(sec);
+    });
+    body.appendChild(doc);
+
+    inner.appendChild(body);
+    scroll.appendChild(inner);
+    pp.appendChild(scroll);
+
+    mark_current(slugOf(PRIVACY_DATA.sections[0].title));
+
+    /* which section the reader is in, for the contents list beside it */
+    if (typeof IntersectionObserver !== "undefined") {
+      var io = new IntersectionObserver(
+        function (entries) {
+          var seen = entries
+            .filter(function (e) { return e.isIntersecting; })
+            .sort(function (a, b) {
+              return a.boundingClientRect.top - b.boundingClientRect.top;
+            })[0];
+          if (seen && seen.target.id) mark_current(seen.target.id);
+        },
+        { root: scroll, rootMargin: "-10% 0px -70% 0px", threshold: 0 }
+      );
+      doc.querySelectorAll("section[id]").forEach(function (s) {
+        io.observe(s);
+      });
+    }
+
+    return { node: pp, close: close };
+  }
+
+  /* one panel at a time, opened and closed by the hash */
+  var ppOpen = null;
+
+  function showPrivacy() {
+    if (ppOpen) return;
+    var built = buildPrivacy();
+    document.body.appendChild(built.node);
+    var prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    built.node.focus();
+
+    function shut() {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+      if (built.node.parentNode) built.node.parentNode.removeChild(built.node);
+      ppOpen = null;
+      if (window.location.hash === "#privacy") {
+        /* replace rather than push, so Back does not walk through reopenings */
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(
+            null, "", window.location.pathname + window.location.search
+          );
+        } else {
+          window.location.hash = "";
+        }
+      }
+    }
+
+    function onKey(e) {
+      if (e.key === "Escape" || e.keyCode === 27) {
+        e.preventDefault();
+        shut();
+        return;
+      }
+      if (e.key !== "Tab" && e.keyCode !== 9) return;
+      var stops = [].slice
+        .call(built.node.querySelectorAll("a[href], button:not([disabled])"))
+        .filter(function (el2) { return el2.offsetParent !== null; });
+      if (!stops.length) return;
+      var first = stops[0];
+      var last = stops[stops.length - 1];
+      if (e.shiftKey && (document.activeElement === first ||
+                         document.activeElement === built.node)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    built.close.addEventListener("click", shut);
+    ppOpen = { shut: shut };
+  }
+
+  safely(function () {
+    var byHash = function () {
+      if (window.location.hash === "#privacy") showPrivacy();
+      else if (ppOpen) ppOpen.shut();
+    };
+    window.addEventListener("hashchange", byHash);
+    byHash();
+  });
+
 })();

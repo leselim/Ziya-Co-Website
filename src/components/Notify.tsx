@@ -1,5 +1,6 @@
 import { useRef, useState, type FormEvent } from "react";
 import { CONTACT_EMAIL, LAUNCH_LABEL, SIGNUP_ENDPOINT } from "../config";
+import SignupDone from "./SignupDone";
 
 type Tone = "info" | "error";
 
@@ -21,6 +22,9 @@ export default function Notify() {
   const [status, setStatus] = useState("");
   const [tone, setTone] = useState<Tone>("info");
   const [busy, setBusy] = useState(false);
+  /* the full-screen note she types back, once an address is safely stored */
+  const [done, setDone] = useState(false);
+  const field = useRef<HTMLInputElement>(null);
   /* Robots fill in every field they find. A human never sees this one, so
      anything in it means the submission is not a person. */
   const trap = useRef<HTMLInputElement>(null);
@@ -30,10 +34,11 @@ export default function Notify() {
     if (busy) return; // no double submissions while one is in flight
 
     if (trap.current?.value) {
-      /* Answer a bot exactly as we answer a person, and send nothing. */
+      /* Answer a bot exactly as a person is answered, and send nothing. */
       setTone("info");
       setStatus("Thank you. I’ll write to you on 9 December.");
       setEmail("");
+      setDone(true);
       return;
     }
 
@@ -85,6 +90,9 @@ export default function Notify() {
 
       setEmail("");
       setStatus("Thank you. I’ll write to you on 9 December.");
+      /* only once the address is actually stored: the mailto fallback and
+         every failure path deliberately do not reach this */
+      setDone(true);
     } catch {
       setTone("error");
       setStatus(
@@ -97,6 +105,15 @@ export default function Notify() {
   }
 
   return (
+    <>
+      <SignupDone
+        open={done}
+        onClose={() => {
+          setDone(false);
+          /* back where they were, not at the top of the document */
+          field.current?.focus();
+        }}
+      />
     <section className="section" id="notify">
       <div className="container notify__inner">
         <div className="notify__copy">
@@ -121,6 +138,7 @@ export default function Notify() {
               name="email"
               autoComplete="email"
               placeholder="you@example.com"
+              ref={field}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={busy}
@@ -162,11 +180,13 @@ export default function Notify() {
 
           <p className="signup__privacy" id="signup-privacy">
             I use your address for the launch note only. You can unsubscribe
-            from any message, or write to {CONTACT_EMAIL} to be removed. See the
-            privacy policy for how I handle your personal information.
+            from any message, or write to {CONTACT_EMAIL} to be removed. See the{" "}
+            <a href="#privacy">privacy policy</a> for how I handle your personal
+            information.
           </p>
         </form>
       </div>
     </section>
+    </>
   );
 }
