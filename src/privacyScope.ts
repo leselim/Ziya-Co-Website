@@ -55,9 +55,4 @@ export const LAUNCH_ONLY_ITEMS = [
   "Process returns, refunds and exchanges",
 ];
 
-/** The note at the top, while the policy is narrower than the document. */
-export const SCOPE_NOTE =
-  "Ziya & Co is not open yet. The only thing this site collects today is " +
-  "the email address you leave for the launch note, and this policy covers " +
-  "only that. The parts about orders, payments and delivery are added when " +
-  "the shop opens on 9 December.";
+/* SCOPE_NOTE moved to privacyVoice.ts, where the rest of her wording lives. */

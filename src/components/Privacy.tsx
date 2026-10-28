@@ -10,9 +10,17 @@ import {
   LAUNCH_ONLY_ITEMS,
   LAUNCH_ONLY_LINES,
   LAUNCH_ONLY_SECTIONS,
-  SCOPE_NOTE,
   SHOP_OPEN,
 } from "../privacyScope";
+import { SCOPE_NOTE, VOICE_LINES, VOICE_TITLES } from "../privacyVoice";
+
+/** The document is drafted in the plural; the site speaks as one woman.
+ *  privacyVoice.ts holds her wording line by line, and anything not listed
+ *  there is the document unchanged. Applied after the launch-scope filter,
+ *  which matches on the document's own text. */
+function voice(s: string) {
+  return VOICE_LINES[s] ?? s;
+}
 
 /* The policy, narrowed to what Ziya & Co is actually doing today. See
    privacyScope.ts: on 9 December SHOP_OPEN goes true and all of this
@@ -59,12 +67,15 @@ function inScope(): PolicySection[] {
  *  The wording itself is untouched and privacy.ts still holds the document
  *  exactly as written. */
 function plain(s: string) {
-  return s.replace(/[\s\u{FE0F}\u{2600}-\u{27BF}\u{1F000}-\u{1FAFF}]+$/u, "");
+  return voice(s.replace(/[\s\u{FE0F}\u{2600}-\u{27BF}\u{1F000}-\u{1FAFF}]+$/u, ""));
 }
 
 /** The document sets its headings in full caps; Ziyanda reads them better
  *  in sentence case, and casing is presentation rather than wording. */
 function sentence(s: string) {
+  /* headings carry the plural too, so hers wins where one is given */
+  const hers = VOICE_TITLES[s];
+  if (hers) return hers;
   const lower = s.toLocaleLowerCase();
   return lower.charAt(0).toLocaleUpperCase() + lower.slice(1);
 }
@@ -201,7 +212,7 @@ export default function Privacy({
               (t) => SHOP_OPEN || !LAUNCH_ONLY_LINES.includes(t)
             ).map((t) => (
               <p className="pp__lede" key={t}>
-                {t}
+                {plain(t)}
               </p>
             ))}
           </div>

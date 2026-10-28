@@ -303,10 +303,23 @@ one of the document's 85 lines appears on the rendered page with nothing
 added. If the policy changes, change the document and regenerate; do not
 retype it here.
 
-**It keeps the document's plural voice.** The rest of the site speaks as
-Ziyanda, in the singular. The policy says "we" and "our" throughout, and it
-stays that way: it is a legal instrument, and its pronouns are not ours to
-restyle for tone. The closing line's heart is the document's too.
+**It speaks as Ziyanda, like the rest of the site.** The document is drafted
+in the plural ("we may collect", "our website"); every plural line is given in
+the singular, and the headings with it, so "Who we are" reads "Who I am" and
+"Contact us" reads "Contact me".
+
+That lives in **`src/privacyVoice.ts`**, as a map of the document's line to
+hers, with the same map in `preview/app.js`. It is a map rather than a
+find-and-replace on purpose. Swapping "we" for "I" blindly leaves broken verbs
+— "ZIYA & CO respects your right to privacy and is committed" has to become
+"I respect your right to privacy and I am committed" — and in a legal notice
+every altered line should be readable beside its original, which is what a map
+gives you and a regex does not.
+
+**This is a legal document and these are wording changes to one.** They were
+made at Ziyanda's request. Whoever drafted the policy should read that file;
+it exists so the changes can be checked at a glance. Deleting the map restores
+the document's own wording exactly.
 
 Three presentation choices, none of which touch the wording:
 
