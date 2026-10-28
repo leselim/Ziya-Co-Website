@@ -310,7 +310,27 @@ restyle for tone. The closing line's heart is the document's too.
 
 Only the casing of the fourteen section headings is changed, from the
 document's full caps to sentence case, which is presentation rather than
-wording.
+wording. The document's "Last updated: September 2026" line is not rendered,
+at Ziyanda's request; the date stays in `privacy.ts` as part of the record.
+
+**One thing on the panel is not hers.** A short note sits under the heading:
+
+> Ziya & Co is not open yet. The only thing this site collects today is the
+> email address you leave for the launch note. The sections below about
+> orders, payments and delivery apply from 9 December, when the shop opens.
+
+The policy is written for the open store, and until launch the site takes an
+address and nothing else. Leaving a reader to assume the payment and delivery
+clauses are already in play would be misleading, so this says plainly that
+they are not. It is fact rather than legal wording, and it is set apart in
+its own band so it is never mistaken for the policy's own voice. **Take it
+out on 9 December**, when the rest of it becomes true.
+
+**Still missing, and it needs her words, not mine.** Addresses from the form
+are stored in a Google spreadsheet, which makes Google a third party handling
+personal information. The document's section 5 covers service providers only
+in the context of fulfilling an order, so nothing on the page currently says
+this. Drafting that clause is not a job for whoever builds the site.
 
 **Links to it are ordinary anchors.** The panel opens off the `#privacy`
 hash, not a click handler, so a link to it can be copied, shared and opened

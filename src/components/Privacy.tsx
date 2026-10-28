@@ -3,9 +3,21 @@ import Wordmark from "./Wordmark";
 import {
   PRIVACY_INTRO,
   PRIVACY_SECTIONS,
-  PRIVACY_UPDATED,
   type PolicyBlock,
 } from "../privacy";
+
+/* Plain fact rather than legal wording, and the only thing on this panel
+   that is not the brand document's own text. The policy is written for the
+   open store; until 9 December the site takes an email address and nothing
+   else, and saying so is more honest than leaving a reader to assume the
+   payment and delivery clauses are already in play.
+
+   PRIVACY_UPDATED is deliberately not rendered: Ziyanda asked for the "last
+   updated" line to come off. It stays in privacy.ts as part of the record. */
+const NOTE =
+  "Ziya & Co is not open yet. The only thing this site collects today is the " +
+  "email address you leave for the launch note. The sections below about " +
+  "orders, payments and delivery apply from 9 December, when the shop opens.";
 
 /** The document sets its headings in full caps; Ziyanda reads them better
  *  in sentence case, and casing is presentation rather than wording. */
@@ -140,7 +152,7 @@ export default function Privacy({
             <h2 id="pp-title" className="display">
               Privacy policy
             </h2>
-            <p className="pp__meta">Last updated {PRIVACY_UPDATED}</p>
+            <p className="pp__note">{NOTE}</p>
             {PRIVACY_INTRO.map((t) => (
               <p className="pp__lede" key={t}>
                 {t}

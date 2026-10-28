@@ -616,11 +616,17 @@
     var h2 = el("h2", "display");
     h2.id = "pp-title";
     h2.textContent = "Privacy policy";
-    var meta = el("p", "pp__meta");
-    meta.textContent = "Last updated " + PRIVACY_DATA.updated;
+    /* plain fact rather than legal wording, and the only thing on this
+       panel that is not the brand document's own text */
+    var note = el("p", "pp__note");
+    note.textContent =
+      "Ziya & Co is not open yet. The only thing this site collects today " +
+      "is the email address you leave for the launch note. The sections " +
+      "below about orders, payments and delivery apply from 9 December, " +
+      "when the shop opens.";
     head.appendChild(label);
     head.appendChild(h2);
-    head.appendChild(meta);
+    head.appendChild(note);
     PRIVACY_DATA.intro.forEach(function (t) {
       var p = el("p", "pp__lede");
       p.textContent = t;

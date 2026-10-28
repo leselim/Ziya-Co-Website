@@ -1350,12 +1350,16 @@ h3.display {
   letter-spacing: -0.015em;
   margin-top: var(--s-3);
 }
-.pp__meta {
-  margin-top: var(--s-3);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--on-ivory-soft);
+/* the one thing on this panel that is not the brand document's own text,
+   so it is set apart rather than folded into the policy's own voice */
+.pp__note {
+  margin-top: var(--s-4);
+  padding: clamp(var(--s-3), 2vw, var(--s-4)) clamp(var(--s-3), 2.4vw, var(--s-5));
+  background: var(--blush);
+  border-block: 1px solid var(--rule);
+  color: var(--on-blush);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.7;
 }
 .pp__lede {
   margin-top: var(--s-4);
@@ -2780,11 +2784,17 @@ h3.display {
     var h2 = el("h2", "display");
     h2.id = "pp-title";
     h2.textContent = "Privacy policy";
-    var meta = el("p", "pp__meta");
-    meta.textContent = "Last updated " + PRIVACY_DATA.updated;
+    /* plain fact rather than legal wording, and the only thing on this
+       panel that is not the brand document's own text */
+    var note = el("p", "pp__note");
+    note.textContent =
+      "Ziya & Co is not open yet. The only thing this site collects today " +
+      "is the email address you leave for the launch note. The sections " +
+      "below about orders, payments and delivery apply from 9 December, " +
+      "when the shop opens.";
     head.appendChild(label);
     head.appendChild(h2);
-    head.appendChild(meta);
+    head.appendChild(note);
     PRIVACY_DATA.intro.forEach(function (t) {
       var p = el("p", "pp__lede");
       p.textContent = t;

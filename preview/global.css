@@ -1322,12 +1322,16 @@ h3.display {
   letter-spacing: -0.015em;
   margin-top: var(--s-3);
 }
-.pp__meta {
-  margin-top: var(--s-3);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--on-ivory-soft);
+/* the one thing on this panel that is not the brand document's own text,
+   so it is set apart rather than folded into the policy's own voice */
+.pp__note {
+  margin-top: var(--s-4);
+  padding: clamp(var(--s-3), 2vw, var(--s-4)) clamp(var(--s-3), 2.4vw, var(--s-5));
+  background: var(--blush);
+  border-block: 1px solid var(--rule);
+  color: var(--on-blush);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.7;
 }
 .pp__lede {
   margin-top: var(--s-4);
