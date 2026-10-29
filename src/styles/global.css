@@ -1029,6 +1029,12 @@ h3.display {
   .site-footer__base {
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--s-4);
+  }
+  .site-footer__meta,
+  .site-footer__legals {
+    flex-direction: column;
+    align-items: flex-start;
     gap: var(--s-2);
   }
 }
@@ -1497,7 +1503,16 @@ h3.display {
   }
 }
 
-/* the footer's legal link sits with the small print */
+/* The foot of the page: where the site is and when it opens on one side,
+   the policies on the other. Three of them now, so they get their own row
+   rather than being squeezed between the other two. */
+.site-footer__meta,
+.site-footer__legals {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--s-3), 2.4vw, var(--s-5));
+  flex-wrap: wrap;
+}
 .site-footer__legal {
   color: var(--on-dark-soft);
   text-decoration: none;

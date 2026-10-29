@@ -425,11 +425,18 @@
           </p>
         </div>
         <div class="site-footer__base">
-          <span>South Africa</span>
-          <!-- an ordinary anchor: the policy opens off the hash, so this can
-               be copied, shared and opened in a new tab like any link -->
-          <a class="site-footer__legal" href="#privacy">Privacy policy</a>
-          <span>Launching 9 December 2026</span>
+          <p class="site-footer__meta">
+            <span>South Africa</span>
+            <span>Launching 9 December 2026</span>
+          </p>
+
+          <!-- ordinary anchors: each opens off its own hash, so it can be
+               copied, shared and opened in a new tab like any link -->
+          <nav class="site-footer__legals" aria-label="Policies">
+            <a class="site-footer__legal" href="#privacy">Privacy policy</a>
+            <a class="site-footer__legal" href="#returns">Returns &amp; exchanges</a>
+            <a class="site-footer__legal" href="#terms">Terms &amp; conditions</a>
+          </nav>
         </div>
       </div>
     </footer>

@@ -290,6 +290,57 @@ The document also contains full shipping, returns and terms copy. None of it
 is on this page: those are store pages for when the shop opens, and a
 coming-soon page is the wrong place for a returns policy.
 
+## The legal documents
+
+Three of them, each a full-screen reading panel rather than a second page:
+this build has no router, and a policy is something you glance at and leave.
+
+| | | |
+|---|---|---|
+| `#privacy` | Privacy policy | 14 sections, 10 shown before launch |
+| `#returns` | Returns & exchanges | 7 sections, all shown |
+| `#terms` | Terms & conditions | 20 sections, all shown |
+
+`src/legalDocs.ts` is the registry and `src/components/LegalPanel.tsx` renders
+any entry in it. The footer links, the hash routing and the standalone build
+all read from that list, so nothing is per-document except the data. Each
+document's section ids carry their own prefix, `pp-`, `rt-`, `tc-`, so two
+documents can never collide on an anchor.
+
+### Each document
+
+All three are generated from their source `.docx` rather than retyped, so the
+wording cannot drift, and each is tested line by line against its document,
+with nothing invented:
+
+| | |
+|---|---|
+| Privacy policy | 85 lines whole |
+| Returns & exchanges | 31 body lines, 7 headings |
+| Terms & conditions | 89 body lines, 20 headings |
+
+Two of them drop their document's closing sign-off, which is furniture: the
+returns policy's carries the old "jewellery for every day, and every version
+of you" tagline, which is no longer the site's.
+
+Neither the privacy policy's "Last updated: September 2026" nor the terms'
+"Last updated: 29 October 2026" is rendered, at Ziyanda's request. Both dates
+stay in the generated files as part of the record. **Worth revisiting for the
+terms**: a contract's version date is the thing that says which version you
+agreed to, and it is the one place where showing it earns its keep.
+
+### The terms are a contract
+
+They name a registered company: "Ziya & Co is the trading name of ZIYA M
+HOLDINGS". The voice map in `src/termsVoice.ts` puts them in the first person
+singular with the other two, which is what Ziyanda asked for across the site.
+
+**If anyone would rather the contract read in the company's plural voice**
+while the brand pages stay singular, that is the conventional choice and it
+is one line: drop `voiceLines` from the terms entry in `legalDocs.ts` and the
+document's own wording returns. The registered name ZIYA M HOLDINGS is left
+exactly as registered either way.
+
 ## The privacy policy
 
 The policy **is** on the page, because the signup form collects an address and

@@ -7,24 +7,25 @@ import Faq from "./components/Faq";
 import Countdown from "./components/Countdown";
 import Notify from "./components/Notify";
 import SiteFooter from "./components/SiteFooter";
-import Privacy from "./components/Privacy";
+import LegalPanel from "./components/LegalPanel";
+import { docForHash, type LegalDoc } from "./legalDocs";
 
 export default function App() {
-  const [privacy, setPrivacy] = useState(false);
+  const [legal, setLegal] = useState<LegalDoc | null>(null);
 
-  /* The policy is opened by the hash rather than by a handler, so the links
-     that reach it are ordinary anchors: they can be copied, shared and
-     opened in a new tab, and the address bar says where you are. */
+  /* The legal documents are opened by the hash rather than by a handler, so
+     the links that reach them are ordinary anchors: they can be copied,
+     shared and opened in a new tab, and the address bar says where you are. */
   useEffect(() => {
-    const check = () => setPrivacy(window.location.hash === "#privacy");
+    const check = () => setLegal(docForHash(window.location.hash));
     check();
     window.addEventListener("hashchange", check);
     return () => window.removeEventListener("hashchange", check);
   }, []);
 
-  const closePrivacy = () => {
-    setPrivacy(false);
-    if (window.location.hash === "#privacy") {
+  const closeLegal = () => {
+    setLegal(null);
+    if (docForHash(window.location.hash)) {
       /* replace rather than push, so Back does not walk through reopenings */
       window.history.replaceState(
         null,
@@ -49,7 +50,7 @@ export default function App() {
         <Notify />
       </main>
       <SiteFooter />
-      <Privacy open={privacy} onClose={closePrivacy} />
+      <LegalPanel doc={legal} onClose={closeLegal} />
     </>
   );
 }
