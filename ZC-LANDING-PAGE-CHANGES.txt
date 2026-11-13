@@ -1,0 +1,19 @@
+ZIYA & CO landing page update
+
+Changes made:
+- Moved the countdown to the first section directly below the sticky header.
+- Removed the "Be there from the beginning" line beneath the launch date.
+- Kept the launch date at 9 December 2026.
+- Updated the Early Access copy to "Something beautiful is coming..." and retained the email form in the final main-page section before the footer.
+- Changed the FAQ section heading from "Made to be worn, not saved" to "A few things to know", retaining the existing FAQ answers.
+- Updated the site fonts to Bodoni Moda + Montserrat.
+- Updated the CSS brand colour tokens to the approved ZIYA & CO palette.
+- Increased the wordmark weight; the header was already sticky and remains sticky while scrolling.
+- Explicitly set the footer metadata and policy links to left-align on mobile.
+
+Before publishing:
+- Install dependencies and run `npm run build`.
+- Preview desktop and mobile layouts.
+- Test the signup form with a controlled test address and confirm the connected Google Apps Script sheet receives it.
+- Confirm the launch date and contact details.
+- Deploy to a Netlify deploy preview first. Do not replace the live site until the preview is approved.

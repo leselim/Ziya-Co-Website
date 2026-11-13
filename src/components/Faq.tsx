@@ -99,7 +99,7 @@ export default function Faq() {
         <Reveal className="section__head">
           <div>
             <p className="label">Good to know</p>
-            <h2 className="display">Made to be worn, not saved</h2>
+            <h2 className="display">A few things to know</h2>
           </div>
           <p className="prose">
             A few things I&rsquo;d like you to know before opening day.
