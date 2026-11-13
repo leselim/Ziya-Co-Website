@@ -20,16 +20,16 @@
      sections, and a single gold accent carried through in three
      strengths: lifted for labels on espresso, flat for fills and rules,
      deepened to bronze for labels on the light ground. */
-  --ivory: #f8f7f3; /* the page ground                                */
-  --cream: #fcfbf7; /* type on the espresso bands and on the buttons  */
-  --blush: #f2e2d5; /* the warm band                                  */
-  --clay: #d6ccc0; /* hairlines on the light ground                   */
-  --gold-lift: #b89a68; /* the gold lifted, for labels on espresso    */
-  --gold: #a88752; /* the accent: fills, rules and marks              */
-  --bronze: #7d5f3d; /* the gold deepened, for labels on light        */
-  --espresso: #332a22; /* the dark sections                           */
-  --ink: #2a2420; /* headings and body copy on the light ground       */
-  --ink-soft: #70635a; /* secondary copy on the light ground          */
+  --ivory: #F7F3EC; /* the page ground                                */
+  --cream: #EDE5D8; /* type on the espresso bands and on the buttons  */
+  --blush: #EDE5D8; /* the warm band                                  */
+  --clay: #B8A99A; /* hairlines on the light ground                   */
+  --gold-lift: #C8B79C; /* the gold lifted, for labels on espresso    */
+  --gold: #C8B79C; /* the accent: fills, rules and marks              */
+  --bronze: #806C5C; /* the gold deepened, for labels on light        */
+  --espresso: #29231F; /* the dark sections                           */
+  --ink: #29231F; /* headings and body copy on the light ground       */
+  --ink-soft: #806C5C; /* secondary copy on the light ground          */
 
   /* type colours, by the surface they sit on */
   --on-ivory: var(--ink); /* body on the ground        14.28:1 */
@@ -45,9 +45,8 @@
   --on-dark-rule: color-mix(in srgb, var(--gold-lift) 42%, transparent);
 
   /* type */
-  --display: "Cormorant Garamond", Cormorant, Garamond, "EB Garamond",
-    "Times New Roman", Georgia, serif;
-  --sans: "DM Sans", "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+  --display: "Bodoni Moda", "Times New Roman", Georgia, serif;
+  --sans: "Montserrat", "Helvetica Neue", Arial, "Segoe UI", sans-serif;
 
   /* space: 4 8 16 24 40 64 96 120 160 200 */
   --s-1: 4px;
@@ -328,7 +327,7 @@ h3.display {
 }
 .wordmark {
   font-family: var(--display);
-  font-weight: 500;
+  font-weight: 600;
   font-size: clamp(17px, 1.5vw, 21px);
   line-height: 1;
   letter-spacing: 0.26em;
@@ -1033,9 +1032,17 @@ h3.display {
   }
   .site-footer__meta,
   .site-footer__legals {
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
     gap: var(--s-2);
+  }
+  .site-footer__base {
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
   }
 }
 

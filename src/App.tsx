@@ -42,11 +42,11 @@ export default function App() {
       </a>
       <SiteHeader />
       <main id="main">
+        <Countdown />
         <Hero />
         <Story />
         <Philosophy />
         <Faq />
-        <Countdown />
         <Notify />
       </main>
       <SiteFooter />

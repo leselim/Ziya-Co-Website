@@ -118,11 +118,10 @@ export default function Notify() {
       <div className="container notify__inner">
         <div className="notify__copy">
           <p className="label">Early access</p>
-          <h2 className="display">Be first to wear it</h2>
+          <h2 className="display">Something beautiful is coming.</h2>
           <p>
-            Leave your email and I&rsquo;ll send you one note when ZIYA &amp;
-            CO opens on {LAUNCH_LABEL}. Nothing before it, and nothing after it
-            you didn&rsquo;t ask for.
+            ZIYA &amp; CO opens on {LAUNCH_LABEL}. Leave your email below, and
+            I&rsquo;ll send you one note when the collection is ready.
           </p>
         </div>
 

@@ -18,11 +18,8 @@ export default function Countdown() {
     <section className="countdown" id="countdown">
       <div className="container countdown__inner">
         <div>
-          <p className="label">The countdown</p>
+          <p className="label">ZIYA &amp; CO</p>
           <h2 className="display">Opening 9 December 2026</h2>
-          <p className="countdown__support">
-            Be there from the beginning.
-          </p>
         </div>
 
         <Reveal>
